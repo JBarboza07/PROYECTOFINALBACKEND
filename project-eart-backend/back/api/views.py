@@ -4,11 +4,12 @@ from .serializers import PublicacionesSerializer,ReaccionesSerializer,Comentario
 
 class PublicacionesListCreateVew(ListCreateAPIView):
       queryset =Publicaciones.objects.all()
-      serializer_class =PublicacionesSerializer
+      serializer_class = PublicacionesSerializer
 
 class ReaccionesListCreateview(ListCreateAPIView):
       queryset =Reacciones.objects.all()
-      serializer_class =ReaccionesSerializer
+      serializer_class = ReaccionesSerializer
 
 class ComentariosListCreateview(ListCreateAPIView):
       queryset =Comentarios.objects.all()
+      serializer_class = ComentariosSeriaizer
