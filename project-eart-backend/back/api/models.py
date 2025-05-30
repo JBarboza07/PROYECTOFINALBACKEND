@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 class Publicaciones(models.Model):
   fechaPublicaion = models.DateField()
+  timePublicacion = models.TimeField()
   publicacionFoto = models.TextField()
   publicacion = models.TextField()
 
@@ -11,6 +12,7 @@ class Reacciones(models.Model):
 
 class Comentarios(models.Model):
   fechaComentarios = models.DateField()
+  timeComentarios = models.TimeField()
   comentarios = models.CharField(max_length=100,blank=True)
 
 class CustomUser(AbstractUser):
@@ -21,6 +23,7 @@ class CustomUser(AbstractUser):
   
 class Mensajes(models.Model):
   fechaMensajes = models.DateField()
+  timeMensajes = models.TimeField()
   mensajes = models.CharField(max_length=100,blank=True)
 
   
