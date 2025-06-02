@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-image: url('../assets/ProjectEarth.png'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.base1-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.form-login {
+  width: 400px;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.7); 
+  border-radius: 9px;
+  padding: 30px;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.tittle {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.label {
+  color: #ffffff;
+  font-size: 18px;
+  margin-left: 10px;
+  display: block;
+  margin-top: 10px;
+}
+
+.inputs {
+  width: 90%;
+  padding: 10px;
+  background-color: #eee;
+  outline: none;
+  border-radius: 9px;
+  border: none;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.button {
+  width: 90%;
+  padding: 12px;
+  background-color: #1647f7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 20px auto 0;
+  display: block;
+}
+
+.button:hover {
+  background-color: #0341ac;
+}
+
+.registerlink {
+  display: block;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 10px;
+  color: #4e9eff;
+  text-decoration: none;
+}
+
+.registerlink:hover {
+  text-decoration: underline;
+}
