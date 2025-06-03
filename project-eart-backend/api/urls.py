@@ -13,3 +13,18 @@ urlpatterns = [
         path('CustomUser/',CrearUsuarioView.as_view(), name='customUser-lista-crear'),
 
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+harold
