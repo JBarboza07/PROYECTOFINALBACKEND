@@ -1,6 +1,6 @@
-from rest_framework.generics import ListCreateAPIView,RetrieveDestroyAPIView,RetrieveUpdateAPIView
+from rest_framework.generics import ListCreateAPIView,RetrieveUpdateAPIView
 from models import Publicaciones,Reacciones,Comentarios,CustomUser,Mensajes
-from .serializers import PublicacionesSerializer,ReaccionesSerializer,ComentariosSeriaizer,CustomUserSerializer,MensajesSerilizer
+from .serializers import PublicacionesSerializer,ReaccionesSerializer,ComentariosSerializer,CustomUserSerializer,MensajesSerilizer
 
 class PublicacionesListCreateVew(ListCreateAPIView):
       queryset =Publicaciones.objects.all()
@@ -32,4 +32,3 @@ class CustomUserListCreateView(ListCreateAPIView):
 class CustomUserDetailview(RetrieveUpdateAPIView):
       queryset =Comentarios.objects.all()
       serializer_class = CustomUser.objects.all()
-      
