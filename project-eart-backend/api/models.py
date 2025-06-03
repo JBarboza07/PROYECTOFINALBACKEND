@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 
 class Publicaciones(models.Model):
   fechaPublicaion = models.DateField()
@@ -15,10 +15,8 @@ class Comentarios(models.Model):
   timeComentarios = models.TimeField()
   comentarios = models.CharField(max_length=100,blank=True)
 
-class CustomUser(AbstractUser):
-  Reacciones = models.ForeignKey(Reacciones, on_delete=models.CASCADE)
-  publicaciones = models.ForeignKey(Publicaciones, on_delete=models.CASCADE)
-  Comentarios = models.ForeignKey(Comentarios, on_delete=models.CASCADE)
+class Usuario(models.Model):
+  usuario = models.OneToOneField(User,on_delete=models.CASCADE)
   fechaNacimiento = models.DateField()
   
 class Mensajes(models.Model):
