@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Registro.css';
-
+import { postData } from '../../services/llamados';
 function FormularioRegistro() {
   const [name, setName] = useState('');
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
+  const [fechaNacimiento, setFechaNacimiento] = useState('');
   const navigate = useNavigate();
 
   // Función para manejar el envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aquí puedes agregar la lógica para manejar el registro sin necesidad de una base de datos
-    console.log('Formulario enviado:', { name, correo, clave });
-    // Redirigir al usuario a la página de inicio
-    navigate('/');
-  };
+  const enviarUsuario = async()=>{
+    const objUsuario = {
+      username: name,
+      email: correo,
+      password: clave,
+      fechaNacimiento: fechaNacimiento
+    }
+    const enviar = await postData("api/CustomUser/",objUsuario)
+    console.log(enviar);
+    
+  }
 
   return (
     
@@ -41,10 +46,13 @@ function FormularioRegistro() {
           <br />
           <input type="password"className="inputs"value={clave}
             onChange={(evento) => setClave(evento.target.value)}/>
+
+             <input type="date"className="inputs"value={fechaNacimiento}
+            onChange={(evento) => setFechaNacimiento(evento.target.value)}/>
           <br />
 
              <Link to="/Login">
-          <button onClick={handleSubmit} className="button">Registrar
+          <button onClick={enviarUsuario} className="button">Registrar
           </button></Link>
           <br />
           <Link to="/Login" className="loginlink">

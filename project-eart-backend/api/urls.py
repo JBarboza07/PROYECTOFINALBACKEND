@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import PublicacionesListCreateVew,PublicacionesDetailView,ReaccionesListCreateview,ReaccionesDetailView,ComentariosListCreateview,ComentariosDetailView
-from .views import CrearUsuarioView
+from .views import CrearUsuarioView,LoginUsuarioView
 
 
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
         path('Comentarios/',ComentariosListCreateview.as_view(), name='Comentarios-lista-crear'),
         path('Comentarios/<int:pk>',ComentariosDetailView.as_view(), name='Comentarios-lista-actulizar'),
         path('CustomUser/',CrearUsuarioView.as_view(), name='customUser-lista-crear'),
+        path('loginUser/',LoginUsuarioView.as_view(), name='customUser-lista-crear'),
 
 ]
 

@@ -4,7 +4,7 @@ from .serializers import PublicacionesSerializer,ReaccionesSerializer,Comentario
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from rest_framework.response import Response
-
+from django.contrib.auth import authenticate
 
 class PublicacionesListCreateVew(ListCreateAPIView):
       queryset =Publicaciones.objects.all()
@@ -32,8 +32,8 @@ class ComentariosDetailView(RetrieveUpdateAPIView):
 class CrearUsuarioView(APIView):
       def post(self,request):
             nombre_usuario = request.data.get("username")
-            clave_usuario = request.data.get("password")
             correo_usuario = request.data.get("email")
+            clave_usuario = request.data.get("password")
             fechaNacimiento = request.data.get("fechaNacimiento")
 
             usuario = User.objects.create_user(
@@ -48,3 +48,15 @@ class CrearUsuarioView(APIView):
             )
 
             return Response({"creado":"USUARIO CREADO CON EXITO"})
+
+class LoginUsuarioView(APIView):
+      def post(self,request):
+            username = request.data.get("username")
+            password = request.data.get("password")
+
+            usuario = authenticate(username=username, password=password)
+
+            if usuario is not None:
+                  return Response({"mensaje":"USUARIO AUTENTICADO CON EXITO"})
+            else:
+                  return Response({"mensaje":"CONTRASEÑA INCORRECTOS"}, status=400)

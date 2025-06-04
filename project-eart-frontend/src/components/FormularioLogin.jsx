@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { postData } from '../../services/llamados';
+import { BiObjectsVerticalBottom } from 'react-icons/bi';
 function FormularioLogin() {
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
   const navigate = useNavigate();
 
-  async function validarUsuario() {
-    // Aquí deberías conectar con la nueva base de datos en el futuro
-    // Por ahora, simplemente imprimimos los datos en consola
-    console.log("Correo ingresado:", correo);
-    console.log("Contraseña ingresada:", clave);
-
-    // Simulación de validación exitosa para prueba
-    if (correo && clave) {
-      navigate("/dhcitas");
-    } else {
-      alert("Por favor completa ambos campos.");
+    
+  
+  const validarUsuario = async()=> {
+    const ObjetoUsuario = {
+      email: correo,
+      password: clave
     }
+    const enviar = await postData("api/loginUser/",ObjetoUsuario)
+
+    if(enviar.exito){
+      console.log("usuario logueado");
+    }
+    else{
+      console.log("usuario no logueado");
+      alert("Usuario o contraseña incorrectos");
+    }
+
   }
 
   return (
