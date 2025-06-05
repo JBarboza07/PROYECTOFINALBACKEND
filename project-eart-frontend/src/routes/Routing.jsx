@@ -7,6 +7,7 @@ import Login from '../pages/Login';
 import Cardd from '../pages/cardd';
 import Panel from '../pages/Panel';
 import PanelDeControl from '../components/PanelDeControl';
+import Nav from '../pages/Nav';
 function Routing() {
  return (
     <div>
@@ -18,7 +19,8 @@ function Routing() {
              <Route path="/Login" element={<Login/>}/>
              <Route path="/Card" element={<Cardd/>}/>
               <Route path="/Panel" element={<PanelDeControl/>}/>
-
+               <Route path="/Navbar" element={<Nav/>}/>
+            
 
           
 
