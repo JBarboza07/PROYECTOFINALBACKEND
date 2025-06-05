@@ -57,6 +57,6 @@ class LoginUsuarioView(APIView):
             usuario = authenticate(username=username, password=password)
 
             if usuario is not None:
-                  return Response({"mensaje":"USUARIO AUTENTICADO CON EXITO"})
+                  return Response({"exito":"USUARIO AUTENTICADO CON EXITO"})
             else:
                   return Response({"mensaje":"CONTRASEÑA INCORRECTOS"}, status=400)

@@ -12,14 +12,16 @@ function FormularioLogin() {
   
   const validarUsuario = async()=> {
     const ObjetoUsuario = {
-      email: correo,
+      username: correo,
       password: clave
     }
     const enviar = await postData("api/loginUser/",ObjetoUsuario)
 
+    console.log(enviar);
+
     if(enviar.exito){
       console.log("usuario logueado");
-    }
+      navigate("/card")    }
     else{
       console.log("usuario no logueado");
       alert("Usuario o contraseña incorrectos");
