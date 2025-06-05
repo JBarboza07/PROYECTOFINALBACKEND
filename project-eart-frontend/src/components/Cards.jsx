@@ -42,8 +42,30 @@ function PostCard({ post, onLike, onComment }) {
   return (
     <Card sx={{ maxWidth: 600, margin: '20px auto' }}>
       <CardHeader
+<<<<<<< HEAD
         avatar={<Avatar src={post.userAvatar} alt={post.username} />}
         title={post.username}
+=======
+        avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
+        action={
+          
+          <>
+            <IconButton onClick={handleMenuOpen}>
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={openMenu}
+              onClose={handleMenuClose}
+            >
+              <MenuItem onClick={handleEdit}>Editar publicación</MenuItem>
+              <MenuItem onClick={handleDelete}>Eliminar publicación</MenuItem>
+            </Menu>
+          </>
+        }
+        title="usuario_earth"
+        subheader="Hace un momento"
+>>>>>>> e02536952659bd57ea27c11e00bd60779c66948f
       />
       <CardMedia
         component="img"

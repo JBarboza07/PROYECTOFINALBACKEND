@@ -3,12 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import '../styles/Registro.css';
-
+import { postData } from '../../services/llamados';
 function FormularioRegistro() {
   const [name, setName] = useState('');
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
   const [fechaNacimiento, setFechaNacimiento] = useState('');
+<<<<<<< HEAD
   const [alerta, setAlerta] = useState(null); // mensaje de alerta
   const navigate = useNavigate();
 
@@ -42,6 +43,22 @@ function FormularioRegistro() {
       navigate('/');
     }, 2000);
   };
+=======
+  const navigate = useNavigate();
+
+  // Función para manejar el envío del formulario
+  const enviarUsuario = async()=>{
+    const objUsuario = {
+      username: name,
+      email: correo,
+      password: clave,
+      fechaNacimiento: fechaNacimiento
+    }
+    const enviar = await postData("api/CustomUser/",objUsuario)
+    console.log(enviar);
+    
+  }
+>>>>>>> e02536952659bd57ea27c11e00bd60779c66948f
 
   return (
     <div className="base1">
@@ -73,6 +90,7 @@ function FormularioRegistro() {
           />
 
           <label htmlFor="clave" className="label">Contraseña</label>
+<<<<<<< HEAD
           <input
             type="password"
             className="inputs"
@@ -91,6 +109,23 @@ function FormularioRegistro() {
           <button onClick={handleSubmit} className="button">Registrar</button>
 
           <Link to="/Login" className="loginlink">¿Ya tienes cuenta?</Link>
+=======
+          <br />
+          <input type="password"className="inputs"value={clave}
+            onChange={(evento) => setClave(evento.target.value)}/>
+
+             <input type="date"className="inputs"value={fechaNacimiento}
+            onChange={(evento) => setFechaNacimiento(evento.target.value)}/>
+          <br />
+
+             <Link to="/Login">
+          <button onClick={enviarUsuario} className="button">Registrar
+          </button></Link>
+          <br />
+          <Link to="/Login" className="loginlink">
+            ¿Ya tienes cuenta?
+          </Link>
+>>>>>>> e02536952659bd57ea27c11e00bd60779c66948f
         </div>
       </div>
     </div>
