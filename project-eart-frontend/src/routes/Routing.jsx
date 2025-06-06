@@ -19,7 +19,7 @@ function Routing() {
              <Route path="/Login" element={<Login/>}/>
              <Route path="/Card" element={<Cardd/>}/>
               <Route path="/Panel" element={<PanelDeControl/>}/>
-               <Route path="/Navbar" element={<Nav/>}/>
+              <Route path="/Navbar" element={<Nav/>}/>
             
 
           
