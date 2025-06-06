@@ -18,25 +18,29 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 // Componente individual de publicación
 function PostCard({ post, onLike, onComment }) {
-  if (!post) return <Typography color="error">Error: post no disponible</Typography>;
-
-  const [liked, setLiked] = useState(post.liked);
-  const [likesCount, setLikesCount] = useState(post.likes);
+  // Mover los hooks arriba del return condicional
+  const [liked, setLiked] = useState(post?.liked || false);
+  const [likesCount, setLikesCount] = useState(post?.likes || 0);
   const [commentText, setCommentText] = useState('');
-  const [comments, setComments] = useState(post.comments || []);
+  const [comments, setComments] = useState(post?.comments || []);
+
+  if (!post) return <Typography color="error">Error: publicación no disponible</Typography>;
 
   const handleLike = () => {
-    setLiked(!liked);
-    setLikesCount(liked ? likesCount - 1 : likesCount + 1);
-    onLike(post.id, !liked);
+    const newLiked = !liked;
+    setLiked(newLiked);
+    setLikesCount((prev) => prev + (newLiked ? 1 : -1));
+    onLike(post.id, newLiked);
   };
 
   const handleAddComment = () => {
-    if (!commentText.trim()) return;
-    const newComment = { id: Date.now(), text: commentText };
-    setComments([...comments, newComment]);
+    const trimmed = commentText.trim();
+    if (!trimmed) return;
+
+    const newComment = { id: Date.now(), text: trimmed };
+    setComments((prev) => [...prev, newComment]);
     setCommentText('');
-    onComment(post.id, commentText);
+    onComment(post.id, trimmed);
   };
 
   return (
@@ -45,12 +49,14 @@ function PostCard({ post, onLike, onComment }) {
         avatar={<Avatar src={post.userAvatar} alt={post.username} />}
         title={post.username}
       />
+
       <CardMedia
         component="img"
         height="500"
         image={post.image}
-        alt="post"
+        alt="publicación"
       />
+
       <CardActions disableSpacing>
         <IconButton onClick={handleLike}>
           {liked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
@@ -62,10 +68,12 @@ function PostCard({ post, onLike, onComment }) {
           {likesCount} {likesCount === 1 ? 'me gusta' : 'me gustas'}
         </Typography>
       </CardActions>
+
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {post.description}
         </Typography>
+
         <Box sx={{ mt: 2 }}>
           {comments.map((c) => (
             <Typography key={c.id} variant="body2" sx={{ mb: 0.5 }}>
@@ -73,6 +81,7 @@ function PostCard({ post, onLike, onComment }) {
             </Typography>
           ))}
         </Box>
+
         <TextField
           fullWidth
           variant="outlined"
@@ -85,6 +94,7 @@ function PostCard({ post, onLike, onComment }) {
             if (e.key === 'Enter') handleAddComment();
           }}
         />
+
         <Button
           variant="contained"
           size="small"
@@ -137,10 +147,7 @@ export default function Cards() {
         post.id === postId
           ? {
               ...post,
-              comments: [
-                ...post.comments,
-                { id: Date.now(), text: commentText },
-              ],
+              comments: [...post.comments, { id: Date.now(), text: commentText }],
             }
           : post
       )
