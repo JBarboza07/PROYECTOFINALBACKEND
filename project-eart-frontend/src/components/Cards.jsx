@@ -20,22 +20,23 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 function PostCard({ post, onLike, onComment }) {
   if (!post) return <Typography color="error">Error: post no disponible</Typography>;
 
-  const [liked, setLiked] = useState(post.liked);
-  const [likesCount, setLikesCount] = useState(post.likes);
-  const [commentText, setCommentText] = useState('');
-  const [comments, setComments] = useState(post.comments || []);
+  const [ Reaccion, setReaccion] = useState(post.Reacciones);
+  const [ReaccionCount, setReaccionCount] = useState(post.ReaccionesCount);
+  const [ComentarioT, setComentarioText] = useState('');
+  const [comentario, setComentario] = useState(post.comments || []);
 
-  const handleLike = () => {
-    setLiked(!liked);
-    setLikesCount(liked ? likesCount - 1 : likesCount + 1);
+  const Darlike = () => {
+    setReaccion(!megusta);
+    setReaccionCount(MeGusta ? MeGustaCount - 1 : MeGustaCount + 1);
     onLike(post.id, !liked);
   };
 
-  const handleAddComment = () => {
-    if (!commentText.trim()) return;
-    const newComment = { id: Date.now(), text: commentText };
-    setComments([...comments, newComment]);
-    setCommentText('');
+
+  const Comentar = () => {
+    if (!ComentarioT.trim()) return;
+    const newComentario = { id: Date.now(), text: commentText };
+    setComentario([...comentario, newComentario]);
+    setComentarioText('');
     onComment(post.id, commentText);
   };
 
@@ -79,17 +80,17 @@ function PostCard({ post, onLike, onComment }) {
           placeholder="Agrega un comentario..."
           size="small"
           value={commentText}
-          onChange={(e) => setCommentText(e.target.value)}
+          onChange={(e) => setComentarioText(e.target.value)}
           sx={{ mt: 1 }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') handleAddComment();
+            if (e.key === 'Enter') Comentar ();
           }}
         />
         <Button
           variant="contained"
           size="small"
           sx={{ mt: 1 }}
-          onClick={handleAddComment}
+          onClick={Comentar}
         >
           Publicar
         </Button>
@@ -123,7 +124,7 @@ export default function Cards() {
     },
   ]);
 
-  const handleLike = (postId, liked) => {
+  const Darlike = (postId, liked) => {
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
         post.id === postId ? { ...post, liked } : post
@@ -131,7 +132,7 @@ export default function Cards() {
     );
   };
 
-  const handleComment = (postId, commentText) => {
+  const Comentar = (postId, commentText) => {
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
         post.id === postId
