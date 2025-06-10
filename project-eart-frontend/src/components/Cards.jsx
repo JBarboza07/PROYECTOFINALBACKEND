@@ -7,10 +7,10 @@ const App = () => {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const data = await getPublicaciones();
-      setPosts(data); // <-- Aquí seteas los posts en el estado
-    };
+    async function fetchPosts() {
+      const publicaciones = await getPublicaciones("api/Publicaciones/");
+      setPosts(publicaciones);
+    }
     fetchPosts();
   }, []);
 
@@ -21,32 +21,26 @@ const App = () => {
   const handleAddPost = async () => {
     if (newPost.trim() && image) {
       const now = new Date();
-      const today = now.toISOString().split("T")[0]; // YYYY-MM-DD
-      const time = now.toTimeString().split(" ")[0]; // HH:MM:SS
+      const defaultTime = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
 
-      // Crear FormData para subir imagen y texto
-      const formData = new FormData();
-      formData.append("fechaPublicaion", today);
-      formData.append("timePublicacion", time);
-      formData.append("publicacionFoto", image); // archivo, no string
-      formData.append("publicacion", newPost);
+      const obj = {
+        fechaPublicaion: "2025-06-10",
+        timePublicacion: defaultTime,
+        publicacionFoto: "urlimagen",
+        publicacion: newPost,
+      };
 
-      try {
-        const res = await postDataPublcaciones("api/Publicaciones/", formData);
-        console.log(res);
+      console.log(obj);
 
-        // Actualizar publicaciones después de subir
-        const updatedPosts = await getPublicaciones();
-        setPosts(updatedPosts);
+      const res = await postDataPublcaciones("api/Publicaciones/", obj);
+      console.log(res);
 
-        // Limpiar campos
-        setNewPost("");
-        setImage(null);
-      } catch (error) {
-        console.error("Error al subir la publicación:", error);
-      }
-    } else {
-      alert("Por favor, escribe algo y selecciona una imagen.");
+      // Actualizar el estado `posts` con la nueva publicación
+      setPosts([...posts, res]);
+
+      // Limpiar el formulario
+      setNewPost("");
+      setImage(null);
     }
   };
 
@@ -57,13 +51,7 @@ const App = () => {
         {posts.map((post) => (
           <li key={post.id}>
             <p>{post.publicacion}</p>
-            {post.publicacionFoto && (
-              <img
-                src={post.publicacionFoto}
-                alt="Publicación"
-                style={{ maxWidth: "100%", marginTop: "10px" }}
-              />
-            )}
+            {post.publicacionFoto && <img src={post.publicacionFoto} alt="Publicación" style={{ maxWidth: "100%" }} />}
           </li>
         ))}
       </ul>
@@ -75,7 +63,7 @@ const App = () => {
         style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
       />
       <input type="file" onChange={handleImageChange} accept="image/*" />
-      <button onClick={handleAddPost} style={{ padding: "8px 12px", cursor: "pointer", marginTop: "10px" }}>
+      <button onClick={handleAddPost} style={{ padding: "8px 12px", cursor: "pointer" }}>
         Subir
       </button>
     </div>
