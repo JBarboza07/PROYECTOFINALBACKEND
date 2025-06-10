@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const publicacionesSimuladas = [
   {
     id: 1,
-    publicacion: "¡Explorando nuevos horizontes! 🌅✨",
+    publicacion: "¡Reciclando! 🌅✨",
     publicacionFoto: "https://source.unsplash.com/random/?nature",
   },
   {
@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial", maxWidth: "500px", margin: "auto" }}>
-      <h2 style={{ textAlign: "center" }}>Mis Publicaciones Simuladas</h2>
+      <h2 style={{ textAlign: "center" }}>Publicaciones</h2>
 
       <div style={{
         display: "grid",
