@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getPublicaciones, postDataPublcaciones } from "../../services/llamados";
+import { getPublicaciones, postDataPublcaciones, deletePublicacion } from "../../services/llamados";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -44,6 +44,13 @@ const App = () => {
     }
   };
 
+  const handleDeletePost = async (id) => {
+    const success = await deletePublicacion("api/Publicaciones", id);
+    if (success) {
+      setPosts(posts.filter(post => post.id !== id)); // Eliminar del estado en el frontend
+    }
+  };
+
   return (
     <div style={{ padding: "20px", fontFamily: "Arial", maxWidth: "400px", margin: "auto" }}>
       <h2>Mis Publicaciones</h2>
@@ -52,6 +59,11 @@ const App = () => {
           <li key={post.id}>
             <p>{post.publicacion}</p>
             {post.publicacionFoto && <img src={post.publicacionFoto} alt="Publicación" style={{ maxWidth: "100%" }} />}
+            <button 
+              onClick={() => handleDeletePost(post.id)} 
+              style={{ padding: "5px 10px", cursor: "pointer", backgroundColor: "red", color: "white", border: "none", marginLeft: "10px" }}>
+              Eliminar
+            </button>
           </li>
         ))}
       </ul>
