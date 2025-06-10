@@ -1,192 +1,85 @@
-import React, { useState } from 'react';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Avatar,
-  IconButton,
-  Typography,
-  TextField,
-  Button,
-  Box,
-  CardMedia,
-} from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import React, { useState, useEffect } from "react";
+import { getPublicaciones, postDataPublcaciones } from "../../services/llamados";
 
-// Componente individual de publicación
-function PostCard({ post, onLike, onComment }) {
-<<<<<<< HEAD
-  // Mover los hooks arriba del return condicional
-  const [liked, setLiked] = useState(post?.liked || false);
-  const [likesCount, setLikesCount] = useState(post?.likes || 0);
-  const [commentText, setCommentText] = useState('');
-  const [comments, setComments] = useState(post?.comments || []);
+const App = () => {
+  const [posts, setPosts] = useState([]);
+  const [newPost, setNewPost] = useState("");
+  const [image, setImage] = useState(null);
 
-  if (!post) return <Typography color="error">Error: publicación no disponible</Typography>;
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const data = await getPublicaciones();
+      setPosts(data); // <-- Aquí seteas los posts en el estado
+    };
+    fetchPosts();
+  }, []);
 
-  const handleLike = () => {
-    const newLiked = !liked;
-    setLiked(newLiked);
-    setLikesCount((prev) => prev + (newLiked ? 1 : -1));
-    onLike(post.id, newLiked);
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
   };
 
-  const handleAddComment = () => {
-    const trimmed = commentText.trim();
-    if (!trimmed) return;
+  const handleAddPost = async () => {
+    if (newPost.trim() && image) {
+      const now = new Date();
+      const today = now.toISOString().split("T")[0]; // YYYY-MM-DD
+      const time = now.toTimeString().split(" ")[0]; // HH:MM:SS
 
-    const newComment = { id: Date.now(), text: trimmed };
-    setComments((prev) => [...prev, newComment]);
-    setCommentText('');
-    onComment(post.id, trimmed);
-=======
-  if (!post) return <Typography color="error">Error: post no disponible</Typography>;
+      // Crear FormData para subir imagen y texto
+      const formData = new FormData();
+      formData.append("fechaPublicaion", today);
+      formData.append("timePublicacion", time);
+      formData.append("publicacionFoto", image); // archivo, no string
+      formData.append("publicacion", newPost);
 
-  const [ Reaccion, setReaccion] = useState(post.Reacciones);
-  const [ReaccionCount, setReaccionCount] = useState(post.ReaccionesCount);
-  const [ComentarioT, setComentarioText] = useState('');
-  const [comentario, setComentario] = useState(post.comments || []);
+      try {
+        const res = await postDataPublcaciones("api/Publicaciones/", formData);
+        console.log(res);
 
-  const Darlike = () => {
-    setReaccion(!megusta);
-    setReaccionCount(MeGusta ? MeGustaCount - 1 : MeGustaCount + 1);
-    onLike(post.id, !liked);
-  };
+        // Actualizar publicaciones después de subir
+        const updatedPosts = await getPublicaciones();
+        setPosts(updatedPosts);
 
-
-  const Comentar = () => {
-    if (!ComentarioT.trim()) return;
-    const newComentario = { id: Date.now(), text: commentText };
-    setComentario([...comentario, newComentario]);
-    setComentarioText('');
-    onComment(post.id, commentText);
->>>>>>> b30a75e968917f6e75482636488a41250dbd8248
+        // Limpiar campos
+        setNewPost("");
+        setImage(null);
+      } catch (error) {
+        console.error("Error al subir la publicación:", error);
+      }
+    } else {
+      alert("Por favor, escribe algo y selecciona una imagen.");
+    }
   };
 
   return (
-    <Card sx={{ maxWidth: 600, margin: '20px auto' }}>
-      <CardHeader
-        avatar={<Avatar src={post.userAvatar} alt={post.username} />}
-        title={post.username}
+    <div style={{ padding: "20px", fontFamily: "Arial", maxWidth: "400px", margin: "auto" }}>
+      <h2>Mis Publicaciones</h2>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>
+            <p>{post.publicacion}</p>
+            {post.publicacionFoto && (
+              <img
+                src={post.publicacionFoto}
+                alt="Publicación"
+                style={{ maxWidth: "100%", marginTop: "10px" }}
+              />
+            )}
+          </li>
+        ))}
+      </ul>
+      <input
+        type="text"
+        value={newPost}
+        onChange={(e) => setNewPost(e.target.value)}
+        placeholder="Escribe tu publicación..."
+        style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
       />
-
-      <CardMedia
-        component="img"
-        height="500"
-        image={post.image}
-        alt="publicación"
-      />
-
-      <CardActions disableSpacing>
-        <IconButton onClick={handleLike}>
-          {liked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
-        </IconButton>
-        <IconButton>
-          <ChatBubbleOutlineIcon />
-        </IconButton>
-        <Typography variant="body2" sx={{ ml: 1 }}>
-          {likesCount} {likesCount === 1 ? 'me gusta' : 'me gustas'}
-        </Typography>
-      </CardActions>
-
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {post.description}
-        </Typography>
-
-        <Box sx={{ mt: 2 }}>
-          {comments.map((c) => (
-            <Typography key={c.id} variant="body2" sx={{ mb: 0.5 }}>
-              <strong>{post.username}:</strong> {c.text}
-            </Typography>
-          ))}
-        </Box>
-
-        <TextField
-          fullWidth
-          variant="outlined"
-          placeholder="Agrega un comentario..."
-          size="small"
-          value={commentText}
-          onChange={(e) => setComentarioText(e.target.value)}
-          sx={{ mt: 1 }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') Comentar ();
-          }}
-        />
-
-        <Button
-          variant="contained"
-          size="small"
-          sx={{ mt: 1 }}
-          onClick={Comentar}
-        >
-          Publicar
-        </Button>
-      </CardContent>
-    </Card>
-  );
-}
-
-// Componente principal que muestra todas las publicaciones
-export default function Cards() {
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      username: 'usuario1',
-      userAvatar: 'https://i.pravatar.cc/150?img=3',
-      image: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
-      description: 'Un día increíble en la playa 🏖️',
-      likes: 12,
-      liked: false,
-      comments: [{ id: 1, text: '¡Qué linda foto!' }],
-    },
-    {
-      id: 2,
-      username: 'usuario2',
-      userAvatar: 'https://i.pravatar.cc/150?img=5',
-      image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e',
-      description: 'Disfrutando el atardecer 🌇',
-      likes: 34,
-      liked: false,
-      comments: [],
-    },
-  ]);
-
-  const Darlike = (postId, liked) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post.id === postId ? { ...post, liked } : post
-      )
-    );
-  };
-
-  const Comentar = (postId, commentText) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post.id === postId
-          ? {
-              ...post,
-              comments: [...post.comments, { id: Date.now(), text: commentText }],
-            }
-          : post
-      )
-    );
-  };
-
-  return (
-    <div>
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          post={post}
-          onLike={handleLike}
-          onComment={handleComment}
-        />
-      ))}
+      <input type="file" onChange={handleImageChange} accept="image/*" />
+      <button onClick={handleAddPost} style={{ padding: "8px 12px", cursor: "pointer", marginTop: "10px" }}>
+        Subir
+      </button>
     </div>
   );
-}
+};
+
+export default App;
