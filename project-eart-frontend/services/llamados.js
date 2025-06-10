@@ -39,4 +39,25 @@ async function getPublicaciones(endpoint) {
     return respuesta;
 }
 
+export async function deletePublicacion(endpoint, id) {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/${endpoint}/${id}/`, {
+            method: "DELETE",
+        });
+
+        if (response.ok) {
+            console.log(`Publicación con ID ${id} eliminada correctamente.`);
+            return true; // Retorna true si la eliminación fue exitosa
+        } else {
+            console.error("Error al eliminar publicación:", response.status);
+            return false; // Retorna false si hay un error
+        }
+    } catch (error) {
+        console.error("Error en la solicitud DELETE:", error);
+        return false;
+    }
+}
+
+
+
 export { postData, getData,postDataPublcaciones,getPublicaciones };
