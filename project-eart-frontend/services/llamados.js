@@ -39,9 +39,9 @@ async function getPublicaciones(endpoint) {
     return respuesta;
 }
 
-export async function deletePublicacion(endpoint, id) {
+async function deletePublicacion(endpoint, id) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/${endpoint}/${id}/`, {
+        const response = await fetch(`http://127.0.0.1:8000/${endpoint}/${id}`, {
             method: "DELETE",
         });
 
@@ -60,4 +60,4 @@ export async function deletePublicacion(endpoint, id) {
 
 
 
-export { postData, getData,postDataPublcaciones,getPublicaciones };
+export { postData, getData,postDataPublcaciones,getPublicaciones,deletePublicacion }

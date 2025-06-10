@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView,RetrieveUpdateAPIView
+from rest_framework.generics import ListCreateAPIView,RetrieveUpdateAPIView,RetrieveUpdateDestroyAPIView
 from .models import Publicaciones,Reacciones,Comentarios,Usuario
 from .serializers import PublicacionesSerializer,ReaccionesSerializer,ComentariosSeriaizer
 from rest_framework.views import APIView
@@ -10,7 +10,7 @@ class PublicacionesListCreateVew(ListCreateAPIView):
       queryset =Publicaciones.objects.all()
       serializer_class = PublicacionesSerializer
 
-class PublicacionesDetailView(RetrieveUpdateAPIView):
+class PublicacionesDetailView(RetrieveUpdateDestroyAPIView):
       queryset =Publicaciones.objects.all()
       serializer_class =PublicacionesSerializer
 

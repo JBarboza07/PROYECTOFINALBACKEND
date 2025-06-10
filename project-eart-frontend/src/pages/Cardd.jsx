@@ -13,6 +13,7 @@ function Cardd() {
       <Navbar/>
       <Cards />
     </Box>
+    
   );
 }
 
