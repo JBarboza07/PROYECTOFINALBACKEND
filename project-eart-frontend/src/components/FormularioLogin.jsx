@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { postData } from '../../services/llamados';
+import { postData } from  '../../services/llamadosUsuarios';
 import { BiObjectsVerticalBottom } from 'react-icons/bi';
 function FormularioLogin() {
   const [correo, setCorreo] = useState('');

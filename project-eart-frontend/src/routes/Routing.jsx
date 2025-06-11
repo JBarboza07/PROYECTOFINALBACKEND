@@ -14,11 +14,11 @@ function Routing() {
     <div>
       <Router>
         <Routes>
-           <Route path="/inicio" element={<Home/>}/>
+           <Route path="/" element={<Home/>}/>
            <Route path="/Saber más" element={<Quienessomos/>}/>
             <Route path="/Registro" element={<Registro/>}/>
              <Route path="/Login" element={<Login/>}/>
-             <Route path="/" element={<Cardd/>}/>
+             <Route path="/Card" element={<Cardd/>}/>
               <Route path="/Panel" element={<PanelDeControl/>}/>
               <Route path="/Navbar" element={<Nav/>}/>
               <Route path="/Publicaciones" element={<Publicaciones/>}/>
