@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Publicaciones(models.Model):
-  fechaPublicaion = models.DateField()
-  timePublicacion = models.TimeField()
+  fechaPublicaion = models.DateField(auto_now_add=True)
+  timePublicacion = models.TimeField(auto_now_add=True)
   publicacionFoto = models.TextField()
   publicacion = models.TextField()
 

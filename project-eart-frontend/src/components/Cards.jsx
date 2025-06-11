@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getPublicaciones, postDataPublcaciones, deletePublicacion } from "../../services/llamados";
+import { getPublicaciones, postDataPublcaciones, deletePublicacion, editPublicacion } from "../../services/llamados";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
   const [image, setImage] = useState(null);
+  const [editingPost, setEditingPost] = useState(null); // Estado para editar una publicación
 
   useEffect(() => {
     async function fetchPosts() {
@@ -20,12 +21,7 @@ const App = () => {
 
   const handleAddPost = async () => {
     if (newPost.trim() && image) {
-      const now = new Date();
-      const defaultTime = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
-
       const obj = {
-        fechaPublicaion: "2025-06-10",
-        timePublicacion: defaultTime,
         publicacionFoto: "urlimagen",
         publicacion: newPost,
       };
@@ -35,10 +31,8 @@ const App = () => {
       const res = await postDataPublcaciones("api/Publicaciones/", obj);
       console.log(res);
 
-      // Actualizar el estado `posts` con la nueva publicación
       setPosts([...posts, res]);
 
-      // Limpiar el formulario
       setNewPost("");
       setImage(null);
     }
@@ -47,7 +41,28 @@ const App = () => {
   const handleDeletePost = async (id) => {
     const success = await deletePublicacion("api/Publicaciones", id);
     if (success) {
-      setPosts(posts.filter(post => post.id !== id)); // Eliminar del estado en el frontend
+      setPosts(posts.filter(post => post.id !== id));
+    }
+  };
+
+  const handleEditPost = (post,id) => {
+    setEditingPost(post)
+    setNewPost(post.publicacion);
+    localStorage.setItem("idPublicacion", id);
+  };
+
+  const handleUpdatePost = async (id) => {
+     if (editingPost) {
+      const objEditar = {
+        publicacion: newPost
+      }
+      const success = await editPublicacion(`api/Publicaciones`,id, objEditar);
+
+      // if (success) {
+      //   setPosts(posts.map(post => post.id === editingPost.id ? updatedPost : post));
+      //   setEditingPost(null);
+      //   setNewPost("");
+      // }
     }
   };
 
@@ -59,6 +74,14 @@ const App = () => {
           <li key={post.id}>
             <p>{post.publicacion}</p>
             {post.publicacionFoto && <img src={post.publicacionFoto} alt="Publicación" style={{ maxWidth: "100%" }} />}
+            <button 
+              onClick={() => {
+                handleEditPost(post)
+                localStorage.setItem("idPublicacion", post.id);
+              }} 
+              style={{ padding: "5px 10px", cursor: "pointer", backgroundColor: "blue", color: "white", border: "none", marginLeft: "10px" }}>
+              Editar
+            </button>
             <button 
               onClick={() => handleDeletePost(post.id)} 
               style={{ padding: "5px 10px", cursor: "pointer", backgroundColor: "red", color: "white", border: "none", marginLeft: "10px" }}>
@@ -75,9 +98,15 @@ const App = () => {
         style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
       />
       <input type="file" onChange={handleImageChange} accept="image/*" />
-      <button onClick={handleAddPost} style={{ padding: "8px 12px", cursor: "pointer" }}>
-        Subir
-      </button>
+      {editingPost ? (
+        <button onClick={handleUpdatePost(localStorage.getItem("idPublicacion"))} style={{ padding: "8px 12px", cursor: "pointer", backgroundColor: "green", color: "white" }}>
+          Actualizar
+        </button>
+      ) : (
+        <button onClick={(e)=>handleAddPost()} style={{ padding: "8px 12px", cursor: "pointer" }}>
+          Subir
+        </button>
+      )}
     </div>
   );
 };

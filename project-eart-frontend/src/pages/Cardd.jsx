@@ -1,5 +1,5 @@
 import React from 'react';
-import Cards from '../components/cards';
+import Cards from '../components/Cards';
 import { Box, Typography } from '@mui/material';
 import Navbar from '../components/Navbar';
 import Publicaciones from '../components/Publicaciones';
