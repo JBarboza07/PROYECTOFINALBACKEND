@@ -1,31 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const publicacionesSimuladas = [
   {
     id: 1,
     publicacion: "¡Reciclando! 🌅✨",
-    publicacionFoto: "https://imgs.search.brave.com/RFDWYmmcia98zkaqvxYOk-WNbypFqRfmZSll9i8iE6M/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTYw/MDgwMDgxNi9lcy9m/b3RvL2dydXBvLWRl/LXRyYWJhamFkb3Jl/cy1lbi1lbC1jZW50/cm8tZGUtcmVjaWNs/YWplLWNsYXNpZmlj/YW5kby1yZXNpZHVv/cy1wbCVDMyVBMXN0/aWNvcy15LXByZXBh/ciVDMyVBMW5kb3Nl/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz1vWFdEeV9ob0hD/QTBQX29JNGJXM2R4/bnEtWGpja3B3R3dX/NHlrY2pydW5RPQ",
+    publicacionFoto: "https://example.com/imagen1.jpg",
   },
   {
     id: 2,
     publicacion: "Café y libros, la mejor combinación ☕📖",
-    publicacionFoto:
-      "https://imgs.search.brave.com/lrbAXAibiRNdhIw0GXJTF4VTsYHDt0-zUnsr9sfLJVo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM4/ODU2MDA5Ni9lcy9m/b3RvL3ZvbGMlQzMl/QTFuLWFyZW5hbC15/LWxhZ28tYXJlbmFs/LWNvc3RhLXJpY2Eu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PUlPanZpUHl3LWJM/ZVZLMlN5MWJIRHZC/T3QwTnBvbm1HcVBv/NWFFT3RtSDg9",
-  },
-  {
-    id: 3,
-    publicacion: "Momentos que valen oro 💛 ",
-    publicacionFoto: "https:",
-  },
-  {
-    id: 4,
-    publicacion: "Arte en cada rincón 🎨🖌️",
-    publicacionFoto: "https://source.unsplash.com/random/400x400/?art",
-  },
-  {
-    id: 5,
-    publicacion: "El viaje comienza con un paso 🚶🌍",
-    publicacionFoto: "https://source.unsplash.com/random/400x400/?travel",
+    publicacionFoto: "https://example.com/imagen2.jpg",
   },
 ];
 
@@ -33,16 +17,48 @@ const App = () => {
   const [likes, setLikes] = useState({});
   const [comentarios, setComentarios] = useState({});
   const [mostrarInput, setMostrarInput] = useState({});
+  const [usuariosLikes, setUsuariosLikes] = useState({});
 
-  // ❤️ Me gusta
-  const toggleLike = (id) => {
-    setLikes((prev) => ({
-      ...prev,
-      [id]: prev[id] ? prev[id] + 1 : 1,
-    }));
+  useEffect(() => {
+    const obtenerDatos = async () => {
+      try {
+        const resLikes = await fetch("/api/likes");
+        const dataLikes = await resLikes.json();
+        setLikes(dataLikes);
+
+        const resComentarios = await fetch("/api/comentarios");
+        const dataComentarios = await resComentarios.json();
+        setComentarios(dataComentarios);
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      }
+    };
+
+    obtenerDatos();
+  }, []);
+
+  const toggleLike = async (id) => {
+    try {
+      if (usuariosLikes[id]) {
+        await fetch(`/api/likes/${id}`, { method: "DELETE" });
+        setLikes((prev) => ({
+          ...prev,
+          [id]: Math.max((prev[id] || 0) - 1, 0),
+        }));
+        setUsuariosLikes((prev) => ({ ...prev, [id]: false }));
+      } else {
+        await fetch(`/api/likes/${id}`, { method: "POST" });
+        setLikes((prev) => ({
+          ...prev,
+          [id]: (prev[id] || 0) + 1,
+        }));
+        setUsuariosLikes((prev) => ({ ...prev, [id]: true }));
+      }
+    } catch (error) {
+      console.error("Error al registrar 'Me gusta':", error);
+    }
   };
 
-  // 💬 Mostrar input comentario
   const toggleComentario = (id) => {
     setMostrarInput((prev) => ({
       ...prev,
@@ -50,74 +66,43 @@ const App = () => {
     }));
   };
 
-  // 💬 Agregar comentario
-  const agregarComentario = (id, texto) => {
+  const agregarComentario = async (id, texto) => {
     if (!texto.trim()) return;
-    setComentarios((prev) => ({
-      ...prev,
-      [id]: [...(prev[id] || []), texto],
-    }));
-  };
-
-  // 🔄 Compartir (copiar al portapapeles)
-  const compartir = (id) => {
-    const url = window.location.href + `#post-${id}`;
-    navigator.clipboard.writeText(url).then(() => {
-      alert("📎 Enlace copiado al portapapeles");
-    });
+    try {
+      await fetch(`/api/comentarios/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ texto }),
+      });
+      setComentarios((prev) => ({
+        ...prev,
+        [id]: [...(prev[id] || []), texto],
+      }));
+    } catch (error) {
+      console.error("Error al agregar comentario:", error);
+    }
   };
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        fontFamily: "Arial",
-        maxWidth: "500px",
-        margin: "auto",
-        backgroundColor: "#fafafa",
-      }}
-    >
+    <div style={{ padding: "20px", fontFamily: "Arial", maxWidth: "500px", margin: "auto", backgroundColor: "#fafafa" }}>
       <h2 style={{ textAlign: "center", marginBottom: "30px" }}>📸 Publicaciones</h2>
 
       {publicacionesSimuladas.map((post) => (
-        <div
-          key={post.id}
-          id={`post-${post.id}`}
-          style={{
-            backgroundColor: "#fff",
-            borderRadius: "8px",
-            marginBottom: "20px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-            overflow: "hidden",
-          }}
-        >
-          <img
-            src={post.publicacionFoto}
-            alt="Publicación"
-            style={{ width: "100%", height: "auto" }}
-          />
+        <div key={post.id} id={`post-${post.id}`} style={{ backgroundColor: "#fff", borderRadius: "8px", marginBottom: "20px", boxShadow: "0 1px 3px rgba(0,0,0,0.1)", overflow: "hidden" }}>
+          <img src={post.publicacionFoto} alt="Publicación" style={{ width: "100%", height: "auto" }} />
           <div style={{ padding: "15px" }}>
             <p>{post.publicacion}</p>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginTop: "10px",
-              }}
-            >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "10px" }}>
               <div style={{ display: "flex", gap: "15px", fontSize: "22px", cursor: "pointer" }}>
-                <span onClick={() => toggleLike(post.id)}>❤️</span>
+                <span onClick={() => toggleLike(post.id)} style={{ opacity: usuariosLikes[post.id] ? 0.5 : 1 }}>❤️</span>
                 <span onClick={() => toggleComentario(post.id)}>💬</span>
-                <span onClick={() => compartir(post.id)}>🔄</span>
               </div>
               <div style={{ fontSize: "14px", color: "#555" }}>
                 {likes[post.id] ? `${likes[post.id]} Me gusta` : "0 Me gusta"}
               </div>
             </div>
 
-            {/* Comentario input */}
             {mostrarInput[post.id] && (
               <div style={{ marginTop: "10px" }}>
                 <input
@@ -140,11 +125,8 @@ const App = () => {
               </div>
             )}
 
-            {/* Lista de comentarios */}
             {comentarios[post.id]?.map((c, i) => (
-              <p key={i} style={{ fontSize: "14px", margin: "5px 0", color: "#333" }}>
-                💬 {c}
-              </p>
+              <p key={i} style={{ fontSize: "14px", margin: "5px 0", color: "#333" }}>💬 {c}</p>
             ))}
           </div>
         </div>
@@ -154,4 +136,3 @@ const App = () => {
 };
 
 export default App;
-
