@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { postData } from  '../../services/llamadosUsuarios';
+import { postData,getData } from  '../../services/llamadosUsuarios';
 import { BiObjectsVerticalBottom } from 'react-icons/bi';
 function FormularioLogin() {
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
   const navigate = useNavigate();
-
     
-  
   const validarUsuario = async()=> {
     const ObjetoUsuario = {
       username: correo,

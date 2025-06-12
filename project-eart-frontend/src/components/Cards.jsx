@@ -58,11 +58,6 @@ const Cards = () => {
       }
       const success = await editPublicacion(`api/Publicaciones`,id, objEditar);
 
-      // if (success) {
-      //   setPosts(posts.map(post => post.id === editingPost.id ? updatedPost : post));
-      //   setEditingPost(null);
-      //   setNewPost("");
-      // }
     }
   };
 
