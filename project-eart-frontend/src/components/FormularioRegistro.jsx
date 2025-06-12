@@ -3,12 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import '../styles/Registro.css';
-import { postData } from '../../services/llamados';
+import { postData } from '../../services/llamadosUsuarios';
 function FormularioRegistro() {
   const [name, setName] = useState('');
   const [correo, setCorreo] = useState('');
   const [clave, setClave] = useState('');
   const [fechaNacimiento, setFechaNacimiento] = useState('');
+  const [alerta, setAlerta] = useState(null); // Estado para manejar la alerta
+  // Hook para la navegación
   const navigate = useNavigate();
   // Función para manejar el envío del formulario
   const enviarUsuario = async()=>{

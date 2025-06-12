@@ -6,7 +6,7 @@ import {
   editPublicacion,
 } from "../../services/llamados";
 
-const App = () => {
+const Cards = () => {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
   const [image, setImage] = useState(null);
@@ -63,6 +63,11 @@ const App = () => {
         setEditingPost(null);
         setNewPost("");
       }
+ 
+
+      const success = await editPublicacion(`api/Publicaciones`,id, objEditar);
+
+
     }
   };
 
@@ -194,4 +199,6 @@ const App = () => {
   );
 };
 
-export default App;
+
+export default Cards;
+

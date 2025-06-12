@@ -12,7 +12,6 @@ function Cardd() {
 
       {/* Simula múltiples publicaciones */}
        <Navbar/>
-       <Cards/>
        <Publicaciones/>
       </Box>
    
