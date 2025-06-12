@@ -7,21 +7,7 @@ const publicacionesSimuladas = [
     publicacionFoto: "https://imgs.search.brave.com/vJtPaZ_2Vvz7xDK-OKjq3bX9tgPe_CsfFLiMfSPWYsg/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS8xNTE4NzY3/LzI2OTkvaS80NTAv/ZGVwb3NpdHBob3Rv/c18yNjk5MzgwOS1z/dG9jay1waG90by1t/YW4taG9sZGluZy1i/b3gtb2YtcmVjeWNs/YWJsZXMuanBn",
     Likes: 23
   },
-  {
-    id: 2,
-    publicacion: "Café y libros, la mejor combinación ☕📖",
-    publicacionFoto: "https://imgs.search.brave.com/ANXB5qZzm03XogmObhtIKrcJ6Ekt1aNbZPNblRJ7jHg/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dW5hY29tdW5pY2Eu/dW5hLmFjLmNyL2lt/YWdlcy9HdWlsbGVy/bW8vMjAyNS9WYXJp/YXMvQW5pdmVyc2Fy/aW8lMjBNQ1AlMjAx/LmpwZw",
-  },
-  {
-    id: 3,
-    publicacion: "Amo este paisaje 🌅✨",
-    publicacionFoto: "https://imgs.search.brave.com/j5W59cnYgqkerFT24pwfOomioq3PJ-qFXemtGXI7dFI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM0/MTA4MjMxMS9lcy9m/b3RvL3BhaXNhamUt/dHJvcGljYWwtY29u/LXVuLXZvbGMlQzMl/QTFuLXJvZGFkby1w/b3ItdW5hLW51YmUu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PWx4Uzk0WHRWc01r/UGxWc0Jzc010S3dl/c0NSQVhrMDNMTzF2/NjQtcTJTM3c9",
-  },
-  {
-    id: 4,
-    publicacion: "Creacion de Dios📖",
-    publicacionFoto: "https://imgs.search.brave.com/idZnVA2qFI5AAX9Sm9LaQ8b9GLPJOvXrwqHRhlJ34Nc/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTEz/NTU5MjgxMi9lcy9m/b3RvL3BsYXlhLWVz/cGFkaWxsYS1wYWlz/YWplLWF0YXJkZWNl/ci1jaWVsby1wYXJx/dWUtbmFjaW9uYWwt/bWFudWVsLWFudG9u/aW8tY29zdGEtcmlj/YS5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9TGFHdUV4RHcw/UEw5TS0wRlVIenRP/WjFndVhqd2hWdFJR/TDNVMk9yMy15az0",
-  },
+  
 ];
 
 const App = () => {
