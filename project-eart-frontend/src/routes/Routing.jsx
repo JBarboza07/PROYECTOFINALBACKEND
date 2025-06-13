@@ -8,7 +8,7 @@ import Cardd from '../pages/Cardd';
 import Panel from '../pages/Panel';
 import PanelDeControl from '../components/PanelDeControl';
 import Nav from '../pages/Nav';
-import Publicaciones from '../components/Publicaciones';
+import Publicaciones1 from '../components/Publicaciones1';
 function Routing() {
  return (
     <div>
@@ -21,7 +21,7 @@ function Routing() {
              <Route path="/Card" element={<Cardd/>}/>
               <Route path="/Panel" element={<PanelDeControl/>}/>
               <Route path="/Navbar" element={<Nav/>}/>
-              <Route path="/Publicaciones" element={<Publicaciones/>}/>
+              <Route path="/Publicaciones1" element={<Publicaciones1/>}/>
             
 
           

@@ -4,23 +4,8 @@ const publicacionesSimuladas = [
   {
     id: 1,
     publicacion: "¡Reciclando! 🌅✨",
-    publicacionFoto: "https://imgs.search.brave.com/vJtPaZ_2Vvz7xDK-OKjq3bX9tgPe_CsfFLiMfSPWYsg/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS8xNTE4NzY3/LzI2OTkvaS80NTAv/ZGVwb3NpdHBob3Rv/c18yNjk5MzgwOS1z/dG9jay1waG90by1t/YW4taG9sZGluZy1i/b3gtb2YtcmVjeWNs/YWJsZXMuanBn",
-    Likes: 23
-  },
-  {
-    id: 2,
-    publicacion: "Café y libros, la mejor combinación ☕📖",
-    publicacionFoto: "https://imgs.search.brave.com/ANXB5qZzm03XogmObhtIKrcJ6Ekt1aNbZPNblRJ7jHg/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dW5hY29tdW5pY2Eu/dW5hLmFjLmNyL2lt/YWdlcy9HdWlsbGVy/bW8vMjAyNS9WYXJp/YXMvQW5pdmVyc2Fy/aW8lMjBNQ1AlMjAx/LmpwZw",
-  },
-  {
-    id: 3,
-    publicacion: "Amo este paisaje 🌅✨",
-    publicacionFoto: "https://imgs.search.brave.com/j5W59cnYgqkerFT24pwfOomioq3PJ-qFXemtGXI7dFI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM0/MTA4MjMxMS9lcy9m/b3RvL3BhaXNhamUt/dHJvcGljYWwtY29u/LXVuLXZvbGMlQzMl/QTFuLXJvZGFkby1w/b3ItdW5hLW51YmUu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PWx4Uzk0WHRWc01r/UGxWc0Jzc010S3dl/c0NSQVhrMDNMTzF2/NjQtcTJTM3c9",
-  },
-  {
-    id: 4,
-    publicacion: "Creacion de Dios📖",
-    publicacionFoto: "https://imgs.search.brave.com/idZnVA2qFI5AAX9Sm9LaQ8b9GLPJOvXrwqHRhlJ34Nc/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTEz/NTU5MjgxMi9lcy9m/b3RvL3BsYXlhLWVz/cGFkaWxsYS1wYWlz/YWplLWF0YXJkZWNl/ci1jaWVsby1wYXJx/dWUtbmFjaW9uYWwt/bWFudWVsLWFudG9u/aW8tY29zdGEtcmlj/YS5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9TGFHdUV4RHcw/UEw5TS0wRlVIenRP/WjFndVhqd2hWdFJR/TDNVMk9yMy15az0",
+    publicacionFoto: "https://imgs.search.brave.com/vJtPaZ_2Vvz7xDK-OKjq3bX9tgPe_CsfFLiMfSPWYsg/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS8xNTE4NzY3/LzI2OTk5L2kvNDUw/L2RlcG9zaXRwaG90/by0yNjk5MzgwOS1z/dG9jay1waG90by1t/YW4taG9sZGluZy1i/b3gtb2YtcmVjeWNs/YWJsZXMuanBn",
+    Likes: 23,
   },
 ];
 
@@ -29,15 +14,16 @@ const App = () => {
   const [comentarios, setComentarios] = useState({});
   const [mostrarInput, setMostrarInput] = useState({});
   const [usuariosLikes, setUsuariosLikes] = useState({});
+  const [comentarioEditando, setComentarioEditando] = useState({});
 
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
-        const resLikes = await fetch("/api/likes");
+        const resLikes = await fetch("/api/Reacciones");
         const dataLikes = await resLikes.json();
         setLikes(dataLikes);
 
-        const resComentarios = await fetch("/api/comentarios");
+        const resComentarios = await fetch("/api/Comentarios");
         const dataComentarios = await resComentarios.json();
         setComentarios(dataComentarios);
       } catch (error) {
@@ -51,14 +37,14 @@ const App = () => {
   const toggleLike = async (id) => {
     try {
       if (usuariosLikes[id]) {
-        await fetch(`/api/likes/${id}`, { method: "DELETE" });
+        await fetch(`/api/Reacciones/${id}`, { method: "DELETE" });
         setLikes((prev) => ({
           ...prev,
           [id]: Math.max((prev[id] || 0) - 1, 0),
         }));
         setUsuariosLikes((prev) => ({ ...prev, [id]: false }));
       } else {
-        await fetch(`/api/likes/${id}`, { method: "POST" });
+        await fetch(`/api/Reacciones/${id}`, { method: "POST" });
         setLikes((prev) => ({
           ...prev,
           [id]: (prev[id] || 0) + 1,
@@ -80,7 +66,7 @@ const App = () => {
   const agregarComentario = async (id, texto) => {
     if (!texto.trim()) return;
     try {
-      await fetch(`/api/comentarios/${id}`, {
+      await fetch(`/api/Comentarios/${id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ texto }),
@@ -94,15 +80,45 @@ const App = () => {
     }
   };
 
+  const editarComentario = async (id, index, nuevoTexto) => {
+    if (!nuevoTexto.trim()) return;
+    try {
+      await fetch(`/api/Comentarios/${id}/${index}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ texto: nuevoTexto }),
+      });
+      setComentarios((prev) => ({
+        ...prev,
+        [id]: prev[id].map((c, i) => (i === index ? nuevoTexto : c)),
+      }));
+      setComentarioEditando((prev) => ({ ...prev, [id]: null }));
+    } catch (error) {
+      console.error("Error al editar comentario:", error);
+    }
+  };
+
+  const eliminarComentario = async (id, index) => {
+    try {
+      await fetch(`/api/Comentarios/${id}/${index}`, { method: "DELETE" });
+      setComentarios((prev) => ({
+        ...prev,
+        [id]: prev[id].filter((_, i) => i !== index),
+      }));
+    } catch (error) {
+      console.error("Error al eliminar comentario:", error);
+    }
+  };
+
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial", maxWidth: "500px", margin: "auto", backgroundColor: "#fafafa" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "30px" }}>📸 Publicaciones</h2>
+    <div style={{ padding: "20px", fontFamily: "Arial", maxWidth: "500px", margin: "auto", backgroundColor: "#fff" }}>
+      <h2 style={{ textAlign: "center", marginBottom: "30px", fontFamily: "sans-serif" }}>📸 Publicaciones</h2>
 
       {publicacionesSimuladas.map((post) => (
-        <div key={post.id} id={`post-${post.id}`} style={{ backgroundColor: "#fff", borderRadius: "8px", marginBottom: "20px", boxShadow: "0 1px 3px rgba(0,0,0,0.1)", overflow: "hidden" }}>
-          <img src={post.publicacionFoto} alt="Publicación" style={{ width: "100%", height: "auto" }} />
+        <div key={post.id} id={`post-${post.id}`} style={{ backgroundColor: "#fff", borderRadius: "12px", marginBottom: "20px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)", overflow: "hidden" }}>
+          <img src={post.publicacionFoto} alt="Publicación" style={{ width: "100%", height: "auto", borderBottom: "1px solid #ddd" }} />
           <div style={{ padding: "15px" }}>
-            <p>{post.publicacion}</p>
+            <p style={{ fontWeight: "bold" }}>{post.publicacion}</p>
 
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "10px" }}>
               <div style={{ display: "flex", gap: "15px", fontSize: "22px", cursor: "pointer" }}>
@@ -110,7 +126,7 @@ const App = () => {
                 <span onClick={() => toggleComentario(post.id)}>💬</span>
               </div>
               <div style={{ fontSize: "14px", color: "#555" }}>
-                {likes[post.id] ? `${likes[post.id]} Me gusta` : " Me gusta"}
+                {(post.Likes + (likes[post.id] || 0))} Me gusta
               </div>
             </div>
 
@@ -137,7 +153,21 @@ const App = () => {
             )}
 
             {comentarios[post.id]?.map((c, i) => (
-              <p key={i} style={{ fontSize: "14px", margin: "5px 0", color: "#333" }}>💬 {c}</p>
+              <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "5px" }}>
+                {comentarioEditando[post.id] === i ? (
+                  <input
+                    type="text"
+                    defaultValue={c}
+                    onBlur={(e) => editarComentario(post.id, i, e.target.value)}
+                    autoFocus
+                  />
+                ) : (
+                  <p onClick={() => setComentarioEditando((prev) => ({ ...prev, [post.id]: i }))} style={{ cursor: "pointer", fontSize: "14px", color: "#333" }}>
+                    💬 {c}
+                  </p>
+                )}
+                <button onClick={() => eliminarComentario(post.id, i)}>❌</button>
+              </div>
             ))}
           </div>
         </div>

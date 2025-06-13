@@ -11,8 +11,7 @@ class Reacciones(models.Model):
   numeroDeReacciones = models.IntegerField()
 
 class Comentarios(models.Model):
-  fechaComentarios = models.DateField()
-  timeComentarios = models.TimeField()
+  fechaComentarios = models.DateTimeField()
   comentarios = models.CharField(max_length=100,blank=True)
 
 class Usuario(models.Model):

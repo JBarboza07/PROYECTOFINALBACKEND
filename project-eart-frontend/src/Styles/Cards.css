@@ -1,0 +1,72 @@
+.publicaciones-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+  margin: auto;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.publicaciones-container h2 {
+  text-align: center;
+  color: #0f4c1d;
+  margin-bottom: 20px;
+}
+
+.publicaciones-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.publicaciones-container li {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.publicaciones-container li p {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.publicaciones-container img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.publicaciones-container button {
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: #0f4c1d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.publicaciones-container button:hover {
+  background-color: #0c3a17;
+}
+
+.publicaciones-container .delete-button {
+  background-color: #d32f2f;
+  margin-left: 10px;
+}
+
+.publicaciones-container .delete-button:hover {
+  background-color: #b71c1c;
+}
+
+.publicaciones-container input[type="text"],
+.publicaciones-container input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}

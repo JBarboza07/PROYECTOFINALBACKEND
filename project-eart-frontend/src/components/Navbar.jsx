@@ -6,8 +6,9 @@ import ExploreIcon from '@mui/icons-material/Explore';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import "../Styles/Nav.css";
 
-export default function Navbar({ user, onLogout, onNavigate }) {
+export default function Navbar({ onLogout, onNavigate }) {
   return (
     <AppBar position="sticky" color="default" sx={{ borderBottom: '1px solid #ddd' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -47,7 +48,7 @@ export default function Navbar({ user, onLogout, onNavigate }) {
           <IconButton onClick={() => onNavigate('addPost')}><AddBoxIcon sx={{ color: '#262626' }} /></IconButton>
           <IconButton onClick={() => onNavigate('notifications')}><FavoriteBorderIcon sx={{ color: '#262626' }} /></IconButton>
           <IconButton onClick={() => onNavigate('profile')}><AccountCircleIcon sx={{ color: '#262626' }} /></IconButton>
-          <Button color="error" onClick={onLogout}>Cerrar sesión</Button>
+          
         </Box>
       </Toolbar>
     </AppBar>

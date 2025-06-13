@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 const publicacionesSimuladas = [
-  {
-    id: 1,
-    publicacion: "¡Reciclando! 🌅✨",
-    publicacionFoto: "https://imgs.search.brave.com/vJtPaZ_2Vvz7xDK-OKjq3bX9tgPe_CsfFLiMfSPWYsg/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zdC5k/ZXBvc2l0cGhvdG9z/LmNvbS8xNTE4NzY3/LzI2OTkvaS80NTAv/ZGVwb3NpdHBob3Rv/c18yNjk5MzgwOS1z/dG9jay1waG90by1t/YW4taG9sZGluZy1i/b3gtb2YtcmVjeWNs/YWJsZXMuanBn",
-    Likes: 23
-  },
   
+  {
+    id: 3,
+    publicacion: "Amo este paisaje 🌅✨",
+    publicacionFoto: "https://imgs.search.brave.com/j5W59cnYgqkerFT24pwfOomioq3PJ-qFXemtGXI7dFI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM0/MTA4MjMxMS9lcy9m/b3RvL3BhaXNhamUt/dHJvcGljYWwtY29u/LXVuLXZvbGMlQzMl/QTFuLXJvZGFkby1w/b3ItdW5hLW51YmUu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PWx4Uzk0WHRWc01r/UGxWc0Jzc010S3dl/c0NSQVhrMDNMTzF2/NjQtcTJTM3c9",
+    Likes: 450
+  },
 ];
 
 const App = () => {
@@ -40,7 +40,7 @@ const App = () => {
         await fetch(`/api/likes/${id}`, { method: "DELETE" });
         setLikes((prev) => ({
           ...prev,
-          [id]: Math.max((prev[id] || 0) - 1, 0),
+          [id]: Math.max((prev[id] || 0) + 1, 0),
         }));
         setUsuariosLikes((prev) => ({ ...prev, [id]: false }));
       } else {
@@ -95,9 +95,10 @@ const App = () => {
                 <span onClick={() => toggleLike(post.id)} style={{ opacity: usuariosLikes[post.id] ? 0.5 : 1 }}>❤️</span>
                 <span onClick={() => toggleComentario(post.id)}>💬</span>
               </div>
-              <div style={{ fontSize: "14px", color: "#555" }}>
-                {likes[post.id] ? `${likes[post.id]} Me gusta` : " Me gusta"}
+             <div style={{ fontSize: "14px", color: "#555" }}>
+                {(post.Likes + (likes[post.id] || 0))} Me gusta
               </div>
+
             </div>
 
             {mostrarInput[post.id] && (
