@@ -14,10 +14,11 @@ class Comentarios(models.Model):
   fechaComentarios = models.DateTimeField()
   comentarios = models.CharField(max_length=100,blank=True)
 
+
 class Usuario(models.Model):
   usuario = models.OneToOneField(User,on_delete=models.CASCADE)
   fechaNacimiento = models.DateField()
-  
+  ImagenPerfil = models.TextField(blank=True)
 class Mensajes(models.Model):
   fechaMensajes = models.DateField()
   timeMensajes = models.TimeField()
