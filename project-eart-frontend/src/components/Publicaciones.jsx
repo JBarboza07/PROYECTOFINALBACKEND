@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import "../Styles/Cards.css";
 
 const publicacionesSimuladas = [
   {
@@ -18,6 +22,7 @@ const App = () => {
   const [comentarios, setComentarios] = useState({});
   const [mostrarInput, setMostrarInput] = useState({});
   const [usuariosLikes, setUsuariosLikes] = useState({});
+  const [nuevosComentarios, setNuevosComentarios] = useState({});
 
   useEffect(() => {
     const obtenerDatos = async () => {
@@ -29,6 +34,9 @@ const App = () => {
         const resComentarios = await fetch("/api/comentarios");
         const dataComentarios = await resComentarios.json();
         setComentarios(dataComentarios);
+
+        // Opcional: si recibes info de qué posts ya liked el usuario, inicializa usuariosLikes aquí
+        // Ejemplo: setUsuariosLikes(dataUsuariosLikes);
       } catch (error) {
         console.error("Error al obtener datos:", error);
       }
@@ -43,7 +51,7 @@ const App = () => {
         await fetch(`/api/likes/${id}`, { method: "DELETE" });
         setLikes((prev) => ({
           ...prev,
-          [id]: Math.max((prev[id] || 0) - 1, 0),
+          [id]: Math.max((prev[id] || 1) - 1, 0),
         }));
         setUsuariosLikes((prev) => ({ ...prev, [id]: false }));
       } else {
@@ -66,8 +74,9 @@ const App = () => {
     }));
   };
 
-  const agregarComentario = async (id, texto) => {
-    if (!texto.trim()) return;
+  const agregarComentario = async (id) => {
+    const texto = nuevosComentarios[id];
+    if (!texto?.trim()) return;
     try {
       await fetch(`/api/comentarios/${id}`, {
         method: "POST",
@@ -78,55 +87,83 @@ const App = () => {
         ...prev,
         [id]: [...(prev[id] || []), texto],
       }));
+      setNuevosComentarios((prev) => ({ ...prev, [id]: "" }));
     } catch (error) {
       console.error("Error al agregar comentario:", error);
     }
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial", maxWidth: "500px", margin: "auto", backgroundColor: "#fafafa" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "30px" }}>📸 Publicaciones</h2>
+    <div className="interacciones-container">
+      <h2 className="interacciones-titulo">📸 Publicaciones</h2>
 
       {publicacionesSimuladas.map((post) => (
-        <div key={post.id} id={`post-${post.id}`} style={{ backgroundColor: "#fff", borderRadius: "8px", marginBottom: "20px", boxShadow: "0 1px 3px rgba(0,0,0,0.1)", overflow: "hidden" }}>
-          <img src={post.publicacionFoto} alt="Publicación" style={{ width: "100%", height: "auto" }} />
-          <div style={{ padding: "15px" }}>
+        <div key={post.id} className="interaccion-post">
+          <img
+            src={post.publicacionFoto}
+            alt="Publicación"
+            className="interaccion-img"
+          />
+          <div className="interaccion-contenido">
             <p>{post.publicacion}</p>
 
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "10px" }}>
-              <div style={{ display: "flex", gap: "15px", fontSize: "22px", cursor: "pointer" }}>
-                <span onClick={() => toggleLike(post.id)} style={{ opacity: usuariosLikes[post.id] ? 0.5 : 1 }}>❤️</span>
-                <span onClick={() => toggleComentario(post.id)}>💬</span>
+            <div className="interaccion-actions">
+              <div className="interaccion-buttons">
+                <span
+                  onClick={() => toggleLike(post.id)}
+                  className="interaccion-like"
+                  style={{ cursor: "pointer" }}
+                  aria-label="Me gusta"
+                >
+                  {usuariosLikes[post.id] ? (
+                    <FavoriteIcon style={{ color: "red" }} />
+                  ) : (
+                    <FavoriteBorderIcon style={{ color: "#4e342e" }} />
+                  )}
+                </span>
+                <span
+                  onClick={() => toggleComentario(post.id)}
+                  style={{ cursor: "pointer", marginLeft: "10px" }}
+                  aria-label="Comentar"
+                >
+                  <ChatBubbleOutlineIcon style={{ color: "#4e342e" }} />
+                </span>
               </div>
-              <div style={{ fontSize: "14px", color: "#555" }}>
-                {likes[post.id] ? `${likes[post.id]} Me gusta` : "0 Me gusta"}
+              <div className="interaccion-likes">
+                {likes[post.id]
+                  ? `${likes[post.id]} Me gusta`
+                  : "0 Me gusta"}
               </div>
             </div>
 
             {mostrarInput[post.id] && (
-              <div style={{ marginTop: "10px" }}>
+              <div className="interaccion-input">
                 <input
                   type="text"
                   placeholder="Escribe un comentario..."
+                  value={nuevosComentarios[post.id] || ""}
+                  onChange={(e) =>
+                    setNuevosComentarios((prev) => ({
+                      ...prev,
+                      [post.id]: e.target.value,
+                    }))
+                  }
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
-                      agregarComentario(post.id, e.target.value);
-                      e.target.value = "";
+                      agregarComentario(post.id);
                     }
                   }}
-                  style={{
-                    width: "100%",
-                    padding: "8px",
-                    borderRadius: "4px",
-                    border: "1px solid #ccc",
-                    marginBottom: "10px",
-                  }}
                 />
+                <button onClick={() => agregarComentario(post.id)}>
+                  Publicar
+                </button>
               </div>
             )}
 
             {comentarios[post.id]?.map((c, i) => (
-              <p key={i} style={{ fontSize: "14px", margin: "5px 0", color: "#333" }}>💬 {c}</p>
+              <p key={i} className="interaccion-comentario-texto">
+                💬 {c}
+              </p>
             ))}
           </div>
         </div>

@@ -39,7 +39,7 @@ const Info = () => {
 
       <footer className="info-footer">
         <p>¿Listo para unirte? Visita nuestra página de inicio o crea tu cuenta ahora.</p>
-        <Link to="/Inicio" className="back-button">Volver al inicio</Link>
+        <Link to="/" className="back-button">Volver al inicio</Link>
       </footer>
     </div>
   );

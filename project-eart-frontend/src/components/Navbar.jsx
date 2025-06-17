@@ -1,54 +1,65 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, InputBase, Box, IconButton, Button } from '@mui/material';
+import "../styles/Nav.css";
+import { useNavigate } from 'react-router-dom';
+
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  InputBase,
+  Box,
+  IconButton,
+} from '@mui/material';
+
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
 import ExploreIcon from '@mui/icons-material/Explore';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import "../Styles/Nav.css";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
-export default function Navbar({ onLogout, onNavigate }) {
+export default function Navbar({ onLogout }) {
+  const navigate = useNavigate(); // React Router redirection hook
+
   return (
-    <AppBar position="sticky" color="default" sx={{ borderBottom: '1px solid #ddd' }}>
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#262626' }}>
+    <AppBar position="sticky" className="nav-appbar">
+      <Toolbar className="nav-toolbar">
+        <Typography
+          variant="h6"
+          className="nav-title"
+          onClick={() => navigate('/feed')}
+          style={{ cursor: 'pointer' }}
+        >
           Project Earth
         </Typography>
 
-        <Box sx={{ flexGrow: 1, mx: 2, maxWidth: 400, position: 'relative' }}>
-          <Box
-            sx={{
-              position: 'absolute',
-              height: '100%',
-              pointerEvents: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              pl: 1,
-              color: 'gray',
-            }}
-          >
+        <Box className="nav-search-container">
+          <Box className="nav-search-icon">
             <SearchIcon />
           </Box>
-          <InputBase
-            placeholder="Buscar"
-            sx={{
-              pl: 4,
-              width: '100%',
-              borderRadius: 1,
-              backgroundColor: '#efefef',
-              height: 35,
-            }}
-          />
+          <InputBase placeholder="Buscar" className="nav-search-input" />
         </Box>
 
-        <Box>
-          <IconButton onClick={() => onNavigate('feed')}><HomeIcon sx={{ color: '#262626' }} /></IconButton>
-          <IconButton onClick={() => onNavigate('explore')}><ExploreIcon sx={{ color: '#262626' }} /></IconButton>
-          <IconButton onClick={() => onNavigate('addPost')}><AddBoxIcon sx={{ color: '#262626' }} /></IconButton>
-          <IconButton onClick={() => onNavigate('notifications')}><FavoriteBorderIcon sx={{ color: '#262626' }} /></IconButton>
-          <IconButton onClick={() => onNavigate('profile')}><AccountCircleIcon sx={{ color: '#262626' }} /></IconButton>
-          
+        <Box className="nav-icons">
+          <IconButton onClick={() => navigate('/Home1')}>
+            <HomeIcon className="nav-icon" />
+          </IconButton>
+          <IconButton onClick={() => navigate('/explore')}>
+            <ExploreIcon className="nav-icon" />
+          </IconButton>
+          <IconButton onClick={() => navigate('/addPost')}>
+            <AddBoxIcon className="nav-icon" />
+          </IconButton>
+          <IconButton onClick={() => navigate('/notifications')}>
+            <FavoriteBorderIcon className="nav-icon" />
+          </IconButton>
+          <IconButton onClick={() => navigate('/profile')}>
+            <AccountCircleIcon className="nav-icon" />
+          </IconButton>
+          <IconButton onClick={onLogout}>
+            <ExitToAppIcon className="nav-icon" />
+          </IconButton>
         </Box>
       </Toolbar>
     </AppBar>

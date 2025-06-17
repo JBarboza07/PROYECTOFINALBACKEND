@@ -35,11 +35,10 @@ body {
 
 .label {
   color: #ffffff;
-  font-size: 13px;
+  font-size: 12px;
   margin-left: 4px;
   display: block;
-  margin-top: 6px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .inputs {
@@ -51,6 +50,7 @@ body {
   border: none;
   margin-left: 4px;
   font-size: 12px;
+  margin-bottom: 10px;
 }
 
 .button {

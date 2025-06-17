@@ -1,72 +1,106 @@
-.publicaciones-container {
+/* Fondo general */
+.interacciones-container {
   padding: 20px;
-  font-family: Arial, sans-serif;
-  max-width: 500px;
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 600px;
   margin: auto;
-  background-color: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background-color: #e8f5e9; /* verde muy claro */
+  border-radius: 10px;
 }
 
-.publicaciones-container h2 {
+/* Título */
+.interacciones-titulo {
   text-align: center;
-  color: #0f4c1d;
-  margin-bottom: 20px;
-}
-
-.publicaciones-container ul {
-  list-style: none;
-  padding: 0;
-}
-
-.publicaciones-container li {
-  background-color: white;
-  padding: 15px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.publicaciones-container li p {
-  margin: 0 0 10px;
-  color: #333;
-}
-
-.publicaciones-container img {
-  max-width: 100%;
-  border-radius: 4px;
-}
-
-.publicaciones-container button {
-  padding: 8px 12px;
-  cursor: pointer;
-  background-color: #0f4c1d;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  margin-bottom: 30px;
+  color: #2e7d32;
+  font-size: 28px;
   font-weight: bold;
+}
+
+/* Publicación */
+.interaccion-post {
+  background-color: #f1f8e9; /* fondo más claro para cada post */
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Imagen */
+.interaccion-img {
+  width: 100%;
+  height: auto;
+}
+
+/* Contenido */
+.interaccion-contenido {
+  padding: 15px;
+}
+
+/* Acciones */
+.interaccion-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 10px;
 }
 
-.publicaciones-container button:hover {
-  background-color: #0c3a17;
+.interaccion-buttons {
+  display: flex;
+  gap: 15px;
+  font-size: 22px;
+  cursor: pointer;
 }
 
-.publicaciones-container .delete-button {
-  background-color: #d32f2f;
-  margin-left: 10px;
+.interaccion-like svg {
+  transition: transform 0.2s;
 }
 
-.publicaciones-container .delete-button:hover {
-  background-color: #b71c1c;
+.interaccion-like svg:hover {
+  transform: scale(1.2);
 }
 
-.publicaciones-container input[type="text"],
-.publicaciones-container input[type="file"] {
+/* Me gusta */
+.interaccion-likes {
+  font-size: 14px;
+  color: #33691e;
+  font-weight: bold;
+}
+
+/* Comentarios */
+.interaccion-comentario-texto {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #2e2e2e;
+}
+
+/* Input de comentario */
+.interaccion-input {
+  margin-top: 10px;
+}
+
+.interaccion-input input {
   width: 100%;
   padding: 8px;
-  margin-bottom: 12px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #c8e6c9;
+  margin-bottom: 10px;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Botón "Publicar" */
+.interaccion-input button {
+  background-color: #81c784;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.interaccion-input button:hover {
+  background-color: #66bb6a;
 }

@@ -1,51 +1,50 @@
-.navbar {
-  background-color: #859933; /* Verde oliva */
-  border-bottom: 1px solid #E0D0A3; /* Beige */
+.nav-appbar {
+  background-color: #2e7d32; /* Verde bosque */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-.navbar-title {
+.nav-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-title {
+  color: #e8f5e9; /* Verde claro para el texto */
   font-weight: bold;
-  color: #1C541D; /* Verde oscuro */
 }
 
-.search-container {
-  position: relative;
-  flex-grow: 1;
-  margin: 0 16px;
-  max-width: 400px;
-}
-
-.search-icon {
-  position: absolute;
-  height: 100%;
-  pointer-events: none;
+.nav-search-container {
+  background-color: #f1f8e9; /* Verde pastel suave */
+  border-radius: 8px;
+  padding: 4px 12px;
   display: flex;
   align-items: center;
-  padding-left: 8px;
-  color: #1C541D;
+  width: 40%;
 }
 
-.search-input {
-  padding-left: 32px;
-  width: 100%;
-  border-radius: 4px;
-  background-color: #DFCF9F; /* Beige claro */
-  height: 35px;
-  color: #1C541D;
+.nav-search-icon {
+  color: #388e3c; /* Verde medio */
+  margin-right: 8px;
 }
 
-.nav-icons button svg {
-  color: #1C541D;
+.nav-search-input {
+  color: #1b5e20;
+  flex-grow: 1;
+  font-weight: 500;
 }
 
-.logout-button {
-  border: 1px solid #1C541D;
-  color: #1C541D;
-  margin-left: 8px;
-  transition: background-color 0.3s ease;
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.logout-button:hover {
-  background-color: #A4D279; /* Verde claro */
-  border-color: #1C541D;
+.nav-icon {
+  color: #a5d6a7; /* Verde hoja claro */
+  transition: color 0.2s ease;
+}
+
+.nav-icon:hover {
+  color: #ffffff; /* Cambia a blanco al pasar el mouse */
 }

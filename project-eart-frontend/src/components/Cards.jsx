@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import {
   getPublicaciones,
   postDataPublcaciones,
@@ -63,76 +64,25 @@ const Cards = () => {
         setEditingPost(null);
         setNewPost("");
       }
- 
-
-      const success = await editPublicacion(`api/Publicaciones`,id, objEditar);
-
-
     }
   };
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        fontFamily: "Arial",
-        maxWidth: "500px",
-        margin: "auto",
-        backgroundColor: "#e8f5e9", // Fondo general
-        minHeight: "100vh",
-      }}
-    >
-      <h2 style={{ textAlign: "center", color: "#0f4c1d", marginBottom: "20px" }}>
-        Mis Publicaciones
-      </h2>
+    <div className="cards-container">
+      <h2 className="cards-title">Mis Publicaciones</h2>
 
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <ul className="card-list">
         {posts.map((post) => (
-          <li
-            key={post.id}
-            style={{
-              backgroundColor: "#ffffff", // Fondo de cada post
-              padding: "15px",
-              marginBottom: "15px",
-              border: "1px solid #ccc",
-              borderRadius: "8px",
-              boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
-            }}
-          >
-            <p style={{ margin: "0 0 10px", color: "#333" }}>{post.publicacion}</p>
+          <li key={post.id} className="card-item">
+            <p className="card-text">{post.publicacion}</p>
             {post.publicacionFoto && (
-              <img
-                src={post.publicacionFoto}
-                alt="Publicación"
-                style={{ maxWidth: "100%", borderRadius: "4px" }}
-              />
+              <img src={post.publicacionFoto} alt="Publicación" className="card-img" />
             )}
-            <div style={{ marginTop: "10px" }}>
-              <button
-                onClick={() => handleEditPost(post, post.id)}
-                style={{
-                  padding: "5px 10px",
-                  cursor: "pointer",
-                  backgroundColor: "#1976d2",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "4px",
-                  marginRight: "10px",
-                }}
-              >
+            <div className="card-buttons">
+              <button onClick={() => handleEditPost(post, post.id)} className="card-button btn-edit">
                 Editar
               </button>
-              <button
-                onClick={() => handleDeletePost(post.id)}
-                style={{
-                  padding: "5px 10px",
-                  cursor: "pointer",
-                  backgroundColor: "#d32f2f",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "4px",
-                }}
-              >
+              <button onClick={() => handleDeletePost(post.id)} className="card-button btn-delete">
                 Eliminar
               </button>
             </div>
@@ -145,53 +95,20 @@ const Cards = () => {
         value={newPost}
         onChange={(e) => setNewPost(e.target.value)}
         placeholder="Escribe tu publicación..."
-        style={{
-          width: "100%",
-          padding: "8px",
-          marginBottom: "10px",
-          borderRadius: "4px",
-          border: "1px solid #ccc",
-        }}
+        className="input-text"
       />
       <input
         type="file"
         onChange={handleImageChange}
         accept="image/*"
-        style={{
-          width: "100%",
-          marginBottom: "12px",
-        }}
+        className="input-file"
       />
       {editingPost ? (
-        <button
-          onClick={handleUpdatePost}
-          style={{
-            padding: "8px 12px",
-            cursor: "pointer",
-            backgroundColor: "#0f4c1d",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            fontWeight: "bold",
-            width: "100%",
-          }}
-        >
+        <button onClick={handleUpdatePost} className="submit-button">
           Actualizar
         </button>
       ) : (
-        <button
-          onClick={handleAddPost}
-          style={{
-            padding: "8px 12px",
-            cursor: "pointer",
-            backgroundColor: "#0f4c1d",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            fontWeight: "bold",
-            width: "100%",
-          }}
-        >
+        <button onClick={handleAddPost} className="submit-button">
           Subir
         </button>
       )}
@@ -199,6 +116,4 @@ const Cards = () => {
   );
 };
 
-
 export default Cards;
-

@@ -52,6 +52,7 @@ function FormularioRegistro() {
           <br />
           <input type="password"className="inputs"value={clave}
             onChange={(evento) => setClave(evento.target.value)}/>
+            <label htmlFor="">Fecha de Nacimiento</label>
              <input type="date"className="inputs"value={fechaNacimiento}
             onChange={(evento) => setFechaNacimiento(evento.target.value)}/>
           <br />
