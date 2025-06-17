@@ -15,7 +15,7 @@ function Routing() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/quienes-somos" element={<Quienessomos />} />
+        <Route path="/QuienesSomos" element={<Quienessomos />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/card" element={<Cardd />} />

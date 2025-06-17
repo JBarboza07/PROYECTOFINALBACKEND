@@ -14,7 +14,7 @@ const Inicio = () => {
            <Link to="/Registro"> <button>
            Únete ahora</button></Link>
 
-           <Link to="/Saber más"><button className=
+           <Link to="/QuienesSomos"><button className=
            "Home-button2">Saber más</button></Link>  
            </div>
            <div>

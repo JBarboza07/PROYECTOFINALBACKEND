@@ -7,7 +7,7 @@ import {
   editPublicacion,
 } from "../../services/llamados";
 
-const Cards = () => {
+const Cards = ({img}) => {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
   const [image, setImage] = useState(null);
@@ -17,6 +17,8 @@ const Cards = () => {
     async function fetchPosts() {
       const publicaciones = await getPublicaciones("api/Publicaciones/");
       setPosts(publicaciones);
+      console.log(publicaciones);
+      
     }
     fetchPosts();
   }, []);
