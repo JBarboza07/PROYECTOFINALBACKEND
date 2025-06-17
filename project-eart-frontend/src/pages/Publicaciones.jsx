@@ -6,7 +6,7 @@ import Publicaciones1 from '../components/Publicaciones1';
 import Publicaciones2 from '../components/Publicaciones2';
 import Publicaciones3 from '../components/Publicaciones3';
 import Publicaciones4 from '../components/Publicaciones4';
-function Cardd() {
+function Publicaciones() {
   return (
     <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', py: 4 }}>
       <Typography variant="h4" align="center" gutterBottom>
@@ -25,4 +25,4 @@ function Cardd() {
   );
 }
 
-export default Cardd;
+export default Publicaciones;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PanelDeControl from '../components/PanelDeControl';
-
+import Cards from '../components/Cards'
+import CardsComponente from '../components/Cards';
 
 
 function Panel() {

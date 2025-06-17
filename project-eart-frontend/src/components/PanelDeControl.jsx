@@ -1,23 +1,23 @@
 import { Box, Typography, Avatar, Button, Tabs, Tab, Grid } from '@mui/material';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import CardsComponente from './Cards';
 import { getData } from '../../services/llamadosUsuarios';
 
-function Cards() {
-  return <Box sx={{ p: 2, border: '1px solid #ccc' }}>Publicación de prueba</Box>;
-}
+  function Cards() {
+    return <Box sx={{ p: 2, border: '1px solid #ccc' }}>Publicación de pruebaa</Box>;
+  }
 
 function PanelDeControl() {
   const [tabIndex, setTabIndex] = useState(0);
-  const [usuarios, setUsuarios] = useState([])
+  const [users, setUsers] = useState([])
 
   useEffect(()=>{
-    async function allUsers() {
-      const users = await getData('CustomUser')
-      setUsuarios(users)
-    }
+    async function Data() {
+      const Users = await getData('users')
+      setUsers(Users)
 
-    allUsers()
+    }
+    Data()
   },[])
 
   const handleCambioDeTab = (event, newValue) => {
@@ -25,6 +25,7 @@ function PanelDeControl() {
   };
 
   return (
+    <>
     <Box sx={{ maxWidth: 900, mx: 'auto', mt: 4 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
         {usuarios.map((usuario)=>(
@@ -33,10 +34,14 @@ function PanelDeControl() {
           </div>
         ))}
         <Avatar sx={{ width: 80, height: 80, mr: 3 }}>
-          
+        
         </Avatar>
         <Box>
-          <Typography variant="h6"></Typography>
+            {users.map((user)=>(
+            <div key={user.id}>
+              <Typography variant="h6">{user.username}</Typography>
+            </div>
+          ))}
           <Typography variant="body2" color="text.secondary"></Typography>
           <Button variant="outlined" size="small" sx={{ mt: 1 }}>Editar perfil</Button>
         </Box>
@@ -68,7 +73,9 @@ function PanelDeControl() {
           </Box>
         )}
       </Box>
+        <CardsComponente/>
     </Box>
+    </>
   );
 }
 

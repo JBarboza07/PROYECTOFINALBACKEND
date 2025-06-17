@@ -19,7 +19,7 @@ function FormularioLogin() {
 
     if(enviar.exito){
       console.log("usuario logueado");
-      navigate("/card")    }
+      navigate("/Publicaciones")    }
     else{
       console.log("usuario no logueado");
       alert("Usuario o contraseña incorrectos");

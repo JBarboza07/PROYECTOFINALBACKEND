@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import {
   getPublicaciones,
   postDataPublcaciones,
@@ -7,7 +6,7 @@ import {
   editPublicacion,
 } from "../../services/llamados";
 
-const Cards = ({img}) => {
+const CardsComponente = () => {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
   const [image, setImage] = useState(null);
@@ -118,4 +117,4 @@ const Cards = ({img}) => {
   );
 };
 
-export default Cards;
+export default CardsComponente;

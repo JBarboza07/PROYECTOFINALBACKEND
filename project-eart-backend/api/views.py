@@ -1,6 +1,6 @@
-from rest_framework.generics import ListCreateAPIView,RetrieveUpdateAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView,RetrieveUpdateAPIView,RetrieveUpdateDestroyAPIView, ListAPIView
 from .models import Publicaciones,Reacciones,Comentarios,Usuario
-from .serializers import PublicacionesSerializer,ReaccionesSerializer,ComentariosSeriaizer
+from .serializers import PublicacionesSerializer,ReaccionesSerializer,ComentariosSeriaizer,UsuariosSerializer
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -28,6 +28,11 @@ class ComentariosListCreateview(ListCreateAPIView):
 class ComentariosDetailView(RetrieveUpdateDestroyAPIView):
         queryset =Comentarios.objects.all()
         serializer_class = ComentariosSeriaizer
+
+class UsuariosListView(ListAPIView):
+      queryset =User.objects.all()
+      serializer_class = UsuariosSerializer
+
 
 class CrearUsuarioView(APIView):
       def post(self,request):

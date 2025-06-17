@@ -48,16 +48,13 @@ export default function Navbar({ onLogout }) {
           <IconButton onClick={() => navigate('/explore')}>
             <ExploreIcon className="nav-icon" />
           </IconButton>
-          <IconButton onClick={() => navigate('/addPost')}>
-            <AddBoxIcon className="nav-icon" />
-          </IconButton>
           <IconButton onClick={() => navigate('/notifications')}>
             <FavoriteBorderIcon className="nav-icon" />
           </IconButton>
-          <IconButton onClick={() => navigate('/profile')}>
+          <IconButton onClick={() => navigate('/Panel')}>
             <AccountCircleIcon className="nav-icon" />
           </IconButton>
-          <IconButton onClick={onLogout}>
+          <IconButton onClick={() => navigate('/')}>
             <ExitToAppIcon className="nav-icon" />
           </IconButton>
         </Box>

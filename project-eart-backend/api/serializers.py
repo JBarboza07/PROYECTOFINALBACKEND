@@ -1,10 +1,18 @@
 from .models import Publicaciones,Reacciones,Comentarios,Mensajes
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 class PublicacionesSerializer(serializers.ModelSerializer):
     class Meta:
         model=Publicaciones
         fields = '__all__'
+
+class UsuariosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=User
+        fields = '__all__'
+
+
 
 
 
