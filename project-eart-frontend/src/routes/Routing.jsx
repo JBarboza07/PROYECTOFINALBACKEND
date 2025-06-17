@@ -1,35 +1,31 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Quienessomos from '../pages/QuienesSomos';
 import Registro from '../pages/Registro';
 import Login from '../pages/Login';
 import Cardd from '../pages/Cardd';
-import Panel from '../pages/Panel';
 import PanelDeControl from '../components/PanelDeControl';
 import Nav from '../pages/Nav';
-import Publicaciones from '../components/Publicaciones';
+import Publicaciones1 from '../components/Publicaciones1';
+import Usuario from '../components/user';
+
+
 function Routing() {
- return (
-    <div>
-      <Router>
-        <Routes>
-           <Route path="/" element={<Home/>}/>
-           <Route path="/Saber más" element={<Quienessomos/>}/>
-            <Route path="/Registro" element={<Registro/>}/>
-             <Route path="/Login" element={<Login/>}/>
-             <Route path="/Card" element={<Cardd/>}/>
-              <Route path="/Panel" element={<PanelDeControl/>}/>
-              <Route path="/Navbar" element={<Nav/>}/>
-              <Route path="/Publicaciones" element={<Publicaciones/>}/>
-            
-
-          
-
-        </Routes>
-      </Router>
-    </div>
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/quienes-somos" element={<Quienessomos />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/card" element={<Cardd />} />
+        <Route path="/panel" element={<PanelDeControl />} />
+        <Route path="/navbar" element={<Nav />} />
+        <Route path="/publicaciones" element={<Publicaciones1 />} />
+        <Route path="/Usuario" element={<Usuario/>} />
+      </Routes>
+    </Router>
   );
 }
 
-export default Routing
+export default Routing;

@@ -6,15 +6,13 @@ import "../Styles/Cards.css";
 
 const publicacionesSimuladas = [
   {
-    id: 1,
-    publicacion: "¡Reciclando! 🌅✨",
-    publicacionFoto: "https://example.com/imagen1.jpg",
-  },
-  {
     id: 2,
     publicacion: "Café y libros, la mejor combinación ☕📖",
-    publicacionFoto: "https://example.com/imagen2.jpg",
+    publicacionFoto: "https://imgs.search.brave.com/ANXB5qZzm03XogmObhtIKrcJ6Ekt1aNbZPNblRJ7jHg/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dW5hY29tdW5pY2Eu/dW5hLmFjLmNyL2lt/YWdlcy9HdWlsbGVy/bW8vMjAyNS9WYXJp/YXMvQW5pdmVyc2Fy/aW8lMjBNQ1AlMjAx/LmpwZw",
+    Likes: 232
   },
+
+
 ];
 
 const App = () => {
@@ -51,7 +49,7 @@ const App = () => {
         await fetch(`/api/likes/${id}`, { method: "DELETE" });
         setLikes((prev) => ({
           ...prev,
-          [id]: Math.max((prev[id] || 1) - 1, 0),
+          [id]: Math.max((prev[id] || 0) + 1, 0),
         }));
         setUsuariosLikes((prev) => ({ ...prev, [id]: false }));
       } else {
@@ -129,11 +127,10 @@ const App = () => {
                   <ChatBubbleOutlineIcon style={{ color: "#4e342e" }} />
                 </span>
               </div>
-              <div className="interaccion-likes">
-                {likes[post.id]
-                  ? `${likes[post.id]} Me gusta`
-                  : "0 Me gusta"}
+            <div style={{ fontSize: "14px", color: "#555" }}>
+              {(post.Likes + (likes[post.id] || 0))} Me gusta
               </div>
+
             </div>
 
             {mostrarInput[post.id] && (

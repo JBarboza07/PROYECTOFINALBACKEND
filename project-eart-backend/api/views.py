@@ -18,14 +18,14 @@ class ReaccionesListCreateview(ListCreateAPIView):
       queryset =Reacciones.objects.all()
       serializer_class = ReaccionesSerializer
 
-class ReaccionesDetailView(RetrieveUpdateAPIView):
+class ReaccionesDetailView(RetrieveUpdateDestroyAPIView):
       queryset =Reacciones.objects.all()
       serializer_class = ReaccionesSerializer      
 
 class ComentariosListCreateview(ListCreateAPIView):
       queryset =Comentarios.objects.all()
       serializer_class = ComentariosSeriaizer
-class ComentariosDetailView(RetrieveUpdateAPIView):
+class ComentariosDetailView(RetrieveUpdateDestroyAPIView):
         queryset =Comentarios.objects.all()
         serializer_class = ComentariosSeriaizer
 
