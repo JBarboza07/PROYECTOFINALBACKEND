@@ -42,9 +42,6 @@ export default function Navbar({ onLogout }) {
         </Box>
 
         <Box className="nav-icons">
-          <IconButton onClick={() => navigate('/Home1')}>
-            <HomeIcon className="nav-icon" />
-          </IconButton>
           <IconButton onClick={() => navigate('/explore')}>
             <ExploreIcon className="nav-icon" />
           </IconButton>

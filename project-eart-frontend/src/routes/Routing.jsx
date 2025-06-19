@@ -7,6 +7,7 @@ import PanelDeControl from '../components/PanelDeControl';
 import Nav from '../pages/Nav';
 import Publicaciones from '../pages/Publicaciones';
 import Cards from '../components/Cards';
+import AdminDashboard from '../pages/AdminDashboard';
 function Routing() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function Routing() {
         <Route path="/navbar" element={<Nav/>} />
         <Route path="/Publicaciones" element={<Publicaciones/>} />
         <Route path="/Cards" element={<Cards/>} />
+        <Route path='/Admin' elemen={<AdminDashboard/>}
       </Routes>
     </Router>
   );
