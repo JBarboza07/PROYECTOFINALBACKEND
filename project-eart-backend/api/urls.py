@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import PublicacionesListCreateVew,PublicacionesDetailView,ReaccionesListCreateview,ReaccionesDetailView,ComentariosListCreateview,ComentariosDetailView
-from .views import CrearUsuarioView,LoginUsuarioView,UsuariosListView
-
+from .views import CrearUsuarioView,LoginUsuarioView,UsuariosListView,UsuarioIdView
 
 urlpatterns = [
         path('Publicaciones/',PublicacionesListCreateVew.as_view(), name='Publicaciones-listar-crear'),
@@ -13,6 +12,7 @@ urlpatterns = [
         path('CustomUser/',CrearUsuarioView.as_view(), name='customUser-lista-crear'),
         path('loginUser/',LoginUsuarioView.as_view(), name='customUser-lista-crear'),
         path('users/',UsuariosListView.as_view(), name='Publicaciones-listar-crear'),
+        path('user_unico/<int:id>/',UsuarioIdView.as_view(), name='Publicacion-listar-actualizar'),
 
 ]
 

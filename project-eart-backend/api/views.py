@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView,RetrieveUpdateAPIView,RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.generics import ListCreateAPIView,RetrieveUpdateAPIView,RetrieveUpdateDestroyAPIView, ListAPIView,RetrieveAPIView
 from .models import Publicaciones,Reacciones,Comentarios,Usuario
 from .serializers import PublicacionesSerializer,ReaccionesSerializer,ComentariosSeriaizer,UsuariosSerializer
 from rest_framework.views import APIView
@@ -62,6 +62,12 @@ class LoginUsuarioView(APIView):
             usuario = authenticate(username=username, password=password)
 
             if usuario is not None:
-                  return Response({"exito":"USUARIO AUTENTICADO CON EXITO"})
+                  return Response({"exito":"USUARIO AUTENTICADO CON EXITO","id":usuario.id})
             else:
                   return Response({"mensaje":"CONTRASEÑA INCORRECTOS"}, status=400)
+            
+class UsuarioIdView(RetrieveAPIView):
+      lookup_field = 'id'
+      queryset =User.objects.all()
+      serializer_class = UsuariosSerializer
+      

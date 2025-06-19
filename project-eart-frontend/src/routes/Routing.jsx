@@ -12,15 +12,11 @@ function Routing() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-<<<<<<< HEAD
         <Route path="/QuienesSomos" element={<Quienessomos />} />
-=======
-        <Route path="/Quienessomos" element={<Quienessomos/>} />
->>>>>>> a110de09 (17/06/2025_3:17PM)
         <Route path="/registro" element={<Registro />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/panel" element={<PanelDeControl />} />
-        <Route path="/navbar" element={<Nav />} />
+        <Route path="/Panel" element={<PanelDeControl/>} />
+        <Route path="/navbar" element={<Nav/>} />
         <Route path="/Publicaciones" element={<Publicaciones/>} />
         <Route path="/Cards" element={<Cards/>} />
       </Routes>

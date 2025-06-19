@@ -1,7 +1,7 @@
 import { Box, Typography, Avatar, Button, Tabs, Tab, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import CardsComponente from './Cards';
-import { getData } from '../../services/llamadosUsuarios';
+import { getData, getDataUnico } from '../../services/llamadosUsuarios';
 
   function Cards() {
     return <Box sx={{ p: 2, border: '1px solid #ccc' }}>Publicación de pruebaa</Box>;
@@ -10,12 +10,13 @@ import { getData } from '../../services/llamadosUsuarios';
 function PanelDeControl() {
   const [tabIndex, setTabIndex] = useState(0);
   const [users, setUsers] = useState([])
+  const id = localStorage.getItem("usuarioID")
 
   useEffect(()=>{
     async function Data() {
-      const Users = await getData('users')
-      setUsers(Users)
-
+      const Users = await getDataUnico('user_unico',id)
+      setUsers(Array.isArray(Users) ? Users : Users ? [Users] : [])
+      console.log(Users)
     }
     Data()
   },[])
@@ -28,11 +29,6 @@ function PanelDeControl() {
     <>
     <Box sx={{ maxWidth: 900, mx: 'auto', mt: 4 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-        {usuarios.map((usuario)=>(
-          <div key={usuario.id}>
-            <p>{usuario.username}</p>
-          </div>
-        ))}
         <Avatar sx={{ width: 80, height: 80, mr: 3 }}>
         
         </Avatar>

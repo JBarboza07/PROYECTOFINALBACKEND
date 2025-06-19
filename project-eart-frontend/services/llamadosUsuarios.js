@@ -1,5 +1,5 @@
 async function postData(endpoint,obj) {
-  const peticion = await fetch(`http://127.0.0.1:8000/api/${endpoint}`, {
+  const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -19,5 +19,14 @@ async function getData(endpoint) {
 }
 
 
+async function getDataUnico(endpoint,id) {
+    const peticion = await fetch(`http://127.0.0.1:8000/api/${endpoint}/${id}/`)
+    const respuesta = await peticion.json();
+    console.log(respuesta);
+    return respuesta;
+}
+
+
+
  
-export { postData, getData }
+export { postData, getData, getDataUnico }
