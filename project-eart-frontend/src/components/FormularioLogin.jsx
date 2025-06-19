@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../styles/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { postData } from '../../services/llamadosUsuarios';
-import { BiObjectsVerticalBottom } from 'react-icons/bi';
 
 function FormularioLogin() {
   const [correo, setCorreo] = useState('');
@@ -38,6 +37,7 @@ function FormularioLogin() {
         <div className='form-login'>
 
           <label htmlFor="correo" className="label">Nombre de Usuario</label> <br />
+          <label htmlFor="correo" className="label">Nombre de usuario</label> <br />
           <input
             type="email"
             className='inputs'
