@@ -44,9 +44,7 @@ function PanelDeControl() {
       </Box>
 
       <Tabs value={tabIndex} onChange={handleCambioDeTab} centered>
-        <Tab label="Publicaciones" />
-        <Tab label="Guardadas" />
-        <Tab label="Configuración" />
+    
       </Tabs>
 
       <Box sx={{ mt: 4 }}>

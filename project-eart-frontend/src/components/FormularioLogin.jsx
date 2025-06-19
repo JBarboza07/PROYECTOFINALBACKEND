@@ -37,7 +37,7 @@ function FormularioLogin() {
         <h1 className="tittle">Iniciar Sesión</h1>
         <div className='form-login'>
 
-          <label htmlFor="correo" className="label">Correo</label> <br />
+          <label htmlFor="correo" className="label">Nombre de Usuario</label> <br />
           <input
             type="email"
             className='inputs'
