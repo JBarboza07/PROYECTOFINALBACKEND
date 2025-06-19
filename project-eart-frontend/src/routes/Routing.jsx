@@ -20,7 +20,6 @@ function Routing() {
         <Route path="/navbar" element={<Nav/>} />
         <Route path="/Publicaciones" element={<Publicaciones/>} />
         <Route path="/Cards" element={<Cards/>} />
-        <Route path='/Admin' elemen={<AdminDashboard/>}
       </Routes>
     </Router>
   );
