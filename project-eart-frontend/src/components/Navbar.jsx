@@ -42,10 +42,10 @@ export default function Navbar({ onLogout }) {
         </Box>
 
         <Box className="nav-icons">
-          <IconButton onClick={() => navigate('/explore')}>
+          <IconButton onClick={() => navigate('/Noticias')}>
             <ExploreIcon className="nav-icon" />
           </IconButton>
-          <IconButton onClick={() => navigate('/notifications')}>
+          <IconButton onClick={() => navigate('/ayuda')}>
             <FavoriteBorderIcon className="nav-icon" />
           </IconButton>
           <IconButton onClick={() => navigate('/Panel')}>
