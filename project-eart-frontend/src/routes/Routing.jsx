@@ -8,6 +8,8 @@ import Nav from '../pages/Nav';
 import Publicaciones from '../pages/Publicaciones';
 import Cards from '../components/Cards';
 import AdminDashboard from '../pages/AdminDashboard';
+import Noticias from '../components/Noticias';
+
 function Routing() {
   return (
     <Router>
@@ -20,6 +22,7 @@ function Routing() {
         <Route path="/navbar" element={<Nav/>} />
         <Route path="/Publicaciones" element={<Publicaciones/>} />
         <Route path="/Cards" element={<Cards/>} />
+         <Route path="/Noti" element={<Noticias/>} />
       </Routes>
     </Router>
   );
