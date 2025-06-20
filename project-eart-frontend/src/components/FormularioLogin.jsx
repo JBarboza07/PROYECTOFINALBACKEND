@@ -22,7 +22,7 @@ function FormularioLogin() {
 
       // Guardar el ID del usuario en localStorage
       localStorage.setItem("usuarioID", enviar.id); // Ajusta "enviar.id" si el ID viene en otro campo
-
+      
       navigate("/Publicaciones");
     } else {
       console.log("usuario no logueado");
@@ -37,9 +37,8 @@ function FormularioLogin() {
         <div className='form-login'>
 
           <label htmlFor="correo" className="label">Nombre de Usuario</label> <br />
-          <label htmlFor="correo" className="label">Nombre de usuario</label> <br />
           <input
-            type="email"
+            type="text"
             className='inputs'
             onChange={(evento) => setCorreo(evento.target.value)}
             value={correo}
