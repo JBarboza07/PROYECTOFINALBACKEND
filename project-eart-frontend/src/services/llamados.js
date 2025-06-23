@@ -12,10 +12,9 @@ async function postDataPublcaciones(endpoint,obj) {
 }
 
 async function getPublicaciones(endpoint) {
-    const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}`)
-    const respuesta = await peticion.json();
-    console.log(respuesta);
-    return respuesta;
+  const res = await fetch(`http://127.0.0.1:8000/api/${endpoint}/`);
+  const data = await res.json();
+  return data;
 }
 
 async function deletePublicacion(endpoint, id) {

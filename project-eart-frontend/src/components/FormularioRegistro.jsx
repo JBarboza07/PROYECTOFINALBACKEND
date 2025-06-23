@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import '../styles/Registro.css';
-import { postData } from '../../services/llamadosUsuarios';
+import { postData } from '../services/llamadosUsuarios';
 
 function FormularioRegistro() {
   const [name, setName] = useState('');

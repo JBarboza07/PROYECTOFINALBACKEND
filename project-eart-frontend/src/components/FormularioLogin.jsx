@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { postData } from '../../services/llamadosUsuarios';
+import { postData } from '../services/llamadosUsuarios';
 
 function FormularioLogin() {
   const [correo, setCorreo] = useState('');
@@ -22,7 +22,7 @@ function FormularioLogin() {
 
       // Guardar el ID del usuario en localStorage
       localStorage.setItem("usuarioID", enviar.id); // Ajusta "enviar.id" si el ID viene en otro campo
-      
+
       navigate("/Publicaciones");
     } else {
       console.log("usuario no logueado");

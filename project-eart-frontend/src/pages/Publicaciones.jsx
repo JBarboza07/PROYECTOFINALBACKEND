@@ -1,5 +1,5 @@
 import React from 'react';
-import Cards from '../components/Cards';
+import Cards from '../components/CardsComponente';
 import { Box, Typography } from '@mui/material';
 import Navbar from '../components/Navbar';
 import Publicaciones1 from '../components/Publicaciones1';
@@ -16,7 +16,6 @@ function Publicaciones() {
       {/* Simula múltiples publicaciones */}
        <Navbar/>
        <Publicaciones1/>
-       <Publicaciones2/>
         <Publicaciones3/>
         <Publicaciones4/>
       </Box>
