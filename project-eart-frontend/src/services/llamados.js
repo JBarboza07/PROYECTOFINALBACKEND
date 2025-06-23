@@ -1,5 +1,5 @@
 async function postDataPublcaciones(endpoint,obj) {
-  const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}`, {
+  const peticion = await fetch(`http://127.0.0.1:8000${endpoint}`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ async function getPublicaciones(endpoint) {
 
 async function deletePublicacion(endpoint, id) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/${endpoint}/${id}`, {
+        const response = await fetch(`http://127.0.0.1:8000${endpoint}/${id}`, {
             method: "DELETE",
         });
 
@@ -39,7 +39,7 @@ async function deletePublicacion(endpoint, id) {
 
  async function editPublicacion(endpoint, id, updatedData) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/${endpoint}/${id}`, {
+    const response = await fetch(`http://127.0.0.1:8000${endpoint}/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

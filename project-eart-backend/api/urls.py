@@ -4,7 +4,7 @@ from .views import CrearUsuarioView,LoginUsuarioView,UsuariosListView,UsuarioIdV
 
 urlpatterns = [
         path('Publicaciones/',PublicacionesListCreateVew.as_view(), name='Publicaciones-listar-crear'),
-        path('Publicaciones/<int:pk>',PublicacionesDetailView.as_view(), name='Publicacion-listar-actualizar'),
+        path('Publicaciones/<int:pk>/',PublicacionesDetailView.as_view(), name='Publicacion-listar-actualizar'),
         path('Reacciones/',ReaccionesListCreateview.as_view(), name='Reacciones-lista-crear'),
         path('Reacciones/<int:pk>',ReaccionesDetailView.as_view(), name='Reacciones-lista-actualizar'),
         path('Comentarios/',ComentariosListCreateview.as_view(), name='Comentarios-lista-crear'),

@@ -42,7 +42,7 @@ const CardsComponente = () => {
   };
 
   const handleDeletePost = async (id) => {
-    const success = await deletePublicacion("Publicaciones", id);
+    const success = await deletePublicacion("/api/Publicaciones", id+"/");
     if (success) {
       setPosts(posts.filter((post) => post.id !== id));
     }
