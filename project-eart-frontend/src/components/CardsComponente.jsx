@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../styles/CardsComponente.css"; // Asegúrate de tener este archivo CSS
 import {
   getPublicaciones,
   postDataPublcaciones,
