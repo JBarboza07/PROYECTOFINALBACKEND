@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import PublicacionesListCreateVew,PublicacionesDetailView,ReaccionesListCreateview,ReaccionesDetailView,ComentariosListCreateview,ComentariosDetailView
+from .views import PublicacionesListCreateView,PublicacionesDetailView,ReaccionesListCreateview,ReaccionesDetailView,ComentariosListCreateview,ComentariosDetailView
 from .views import CrearUsuarioView,LoginUsuarioView,UsuariosListView,UsuarioIdView
 
 urlpatterns = [
-        path('Publicaciones/',PublicacionesListCreateVew.as_view(), name='Publicaciones-listar-crear'),
+        path('Publicaciones/',PublicacionesListCreateView.as_view(), name='Publicaciones-listar-crear'),
         path('Publicaciones/<int:pk>/',PublicacionesDetailView.as_view(), name='Publicacion-listar-actualizar'),
         path('Reacciones/',ReaccionesListCreateview.as_view(), name='Reacciones-lista-crear'),
         path('Reacciones/<int:pk>',ReaccionesDetailView.as_view(), name='Reacciones-lista-actualizar'),

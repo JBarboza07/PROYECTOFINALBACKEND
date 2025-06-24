@@ -1,6 +1,6 @@
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateAPIView,RetrieveUpdateDestroyAPIView, ListAPIView,RetrieveAPIView
 from .models import Publicaciones,Reacciones,Comentarios,Usuario
-from .serializers import PublicacionesSerializer,ReaccionesSerializer,ComentariosSeriaizer,UsuariosSerializer
+from .serializers import PublicacionesSerializer,ReaccionesSerializer,ComentariosSerializer,UsuariosSerializer
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -24,12 +24,39 @@ class PermisosVistas(BasePermission):
             if "usuario" in grupos_usuarios and metodo in ["GET","POST"]:
                   return True
             
+            if "administrador" in grupos_usuarios and metodo in ["GET","POST","PUT","PATCH","DELETE"]:
+                  return True
             
+
+
+            return False
+      
+class PermisosVistas2(BasePermission):
+      def has_permission(self, request, view):
+
+            usuario = request.user # obtenemos la verificación que el usuario está autenticado
+
+            grupos_usuarios = usuario.groups.values_list('name', flat=True) # obtenemos todos los grupos de la BD
+
+            metodo = request.method # obtenemos el método de la petición
+
+            """
+                  VALIDACIONES DE PERMISOS PARA LAS VISTAS
+            """
+
+            if "usuario" in grupos_usuarios and metodo in ["GET","POST","DELETE"]:
+                  return True
+            
+            if "administrador" in grupos_usuarios and metodo in ["GET","POST","PUT","PATCH","DELETE"]:
+                  return True
+            
+
+
             return False
                   
 
-class PublicacionesListCreateVew(ListCreateAPIView):
-      permission_classes = [PermisosVistas]
+class PublicacionesListCreateView(ListCreateAPIView):
+     # permission_classes = [PermisosVistas]
       queryset =Publicaciones.objects.all()
       serializer_class = PublicacionesSerializer
 
@@ -46,11 +73,12 @@ class ReaccionesDetailView(RetrieveUpdateDestroyAPIView):
       serializer_class = ReaccionesSerializer      
 
 class ComentariosListCreateview(ListCreateAPIView):
+      permission_classes = [PermisosVistas2]
       queryset =Comentarios.objects.all()
-      serializer_class = ComentariosSeriaizer
+      serializer_class = ComentariosSerializer
 class ComentariosDetailView(RetrieveUpdateDestroyAPIView):
         queryset =Comentarios.objects.all()
-        serializer_class = ComentariosSeriaizer
+        serializer_class = ComentariosSerializer
 
 class UsuariosListView(ListAPIView):
       queryset =User.objects.all()

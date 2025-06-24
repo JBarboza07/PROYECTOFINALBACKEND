@@ -13,15 +13,12 @@ class UsuariosSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
-
-
 class ReaccionesSerializer(serializers.ModelSerializer):
     class Meta:
         model=Reacciones
         fields = '__all__'
 
-class ComentariosSeriaizer(serializers.ModelSerializer):
+class ComentariosSerializer(serializers.ModelSerializer):
     class Meta:
         model=Comentarios
         fields = '__all__'

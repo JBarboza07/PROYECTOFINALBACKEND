@@ -6,10 +6,11 @@ import Login from '../pages/Login';
 import PanelDeControl from '../components/PanelDeControl';
 import Nav from '../pages/Nav';
 import Publicaciones from '../pages/Publicaciones';
-import CardsComponente from '../components/CardsComponente';
+import CardsComponent from '../components/CardsComponente';
 import AdminDashboard from '../pages/AdminDashboard';
-import Noticias from '../components/Noticias';
-import CentroDeAyuda from '../components/CentroDeAyuda';
+import Noti from '../pages/Noti';
+import CentroAyuda from '../pages/CentroAyuda';
+import PanelAdmin from '../pages/PanelAdmin';
 function Routing() {
   return (
     <Router>
@@ -21,9 +22,10 @@ function Routing() {
         <Route path="/Panel" element={<PanelDeControl/>} />
         <Route path="/navbar" element={<Nav/>} />
         <Route path="/Publicaciones" element={<Publicaciones/>} />
-        <Route path="/Cards" element={<CardsComponente/>} />
-        <Route path="/Noti" element={<Noticias/>} />
-       <Route path="/CentroDeAyuda" element={<CentroDeAyuda/>} />
+        <Route path="/CardsComponent" element={<CardsComponent/>} />
+        <Route path="/Noti" element={<Noti/>} />
+       <Route path="/CentroAyuda" element={<CentroAyuda/>} />
+       <Route path="/Admin" element={<PanelAdmin/>} />
       </Routes>
     </Router>
   );
