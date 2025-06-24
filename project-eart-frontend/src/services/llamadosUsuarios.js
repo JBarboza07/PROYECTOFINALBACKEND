@@ -18,6 +18,25 @@ async function getData(endpoint) {
     return respuesta;
 }
 
+async function deleteUsuarios(endpoint, id) {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/${endpoint}/${id}`, {
+            method: "DELETE",
+        });
+
+        if (response.ok) {
+            console.log(`Reacción con ID ${id} eliminada correctamente.`);
+            return true; // Retorna true si la eliminación fue exitosa
+        } else {
+            console.error("Error al eliminar reacción:", response.status);
+            return false; // Retorna false si hay un error
+        }
+    } catch (error) {
+        console.error("Error en la solicitud DELETE:", error);
+        return false;
+    }
+}
+
 
 async function getDataUnico(endpoint,id) {
     const peticion = await fetch(`http://127.0.0.1:8000/api/${endpoint}/${id}/`)
@@ -29,4 +48,4 @@ async function getDataUnico(endpoint,id) {
 
 
  
-export { postData, getData, getDataUnico }
+export { postData, getData, getDataUnico,deleteUsuarios };
