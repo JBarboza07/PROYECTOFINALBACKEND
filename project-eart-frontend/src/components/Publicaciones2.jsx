@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Box, Typography, Avatar, Button, Tabs, Tab, Grid } from '@mui/material';
-import { getData } from '../services/llamadosUsuarios';
+import { getData } from '../../services/llamadosUsuarios';
 
 function PanelDeControl() {
   const [tabIndex, setTabIndex] = useState(0);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/AdminPanel.css';
-import { getData, deleteData } from '../services/llamadosUsuarios'; // Asegúrate de tener deleteData configurado
+import { getData } from '../../services/llamadosUsuarios'; // Asegúrate de que esta ruta sea correcta
 
 function AdminPanel() {
   const [usuarios, setUsuarios] = useState([]);
@@ -12,6 +12,7 @@ function AdminPanel() {
         const usuariosData = await getData('users');
         const publicacionesData = await getData('Publicaciones');
         setUsuarios(usuariosData);
+        
         setPosts(publicacionesData);
       } catch (error) {
         console.error("Error al cargar datos:", error);
@@ -23,30 +24,14 @@ function AdminPanel() {
   const eliminarPublicacion = async (id) => {
     if (!window.confirm("¿Seguro que quieres eliminar esta publicación?")) return;
     try {
-      await deleteData(`publicaciones/${id}`);
+      // Asumiendo que tienes un servicio deletePublicacion
+      await getData(`/publicaciones/${id}`, { method: 'DELETE' });
       setPosts(posts.filter((post) => post.id !== id));
       alert("Publicación eliminada");
     } catch (error) {
-      console.error("Error al eliminar publicación:", error);
+      console.error("Error al eliminar:", error);
       alert("Error al eliminar publicación");
     }
-  };
-
-  const eliminarUsuario = async (id) => {
-    if (!window.confirm("¿Seguro que quieres eliminar este usuario?")) return;
-    try {
-      await deleteData(`users/${id}`);
-      setUsuarios(usuarios.filter((user) => user.id !== id));
-      alert("Usuario eliminado");
-    } catch (error) {
-      console.error("Error al eliminar usuario:", error);
-      alert("No se pudo eliminar el usuario");
-    }
-  };
-
-  const editarUsuario = (usuario) => {
-    alert(`Editar usuario: ${usuario.username}`);
-    // Aquí puedes abrir un modal o navegar a otra vista para editarlo
   };
 
   return (
@@ -61,7 +46,6 @@ function AdminPanel() {
               <th>Usuario</th>
               <th>Correo</th>
               <th>Registro</th>
-              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -69,11 +53,7 @@ function AdminPanel() {
               <tr key={usuario.id}>
                 <td>{usuario.username}</td>
                 <td>{usuario.email}</td>
-                <td>{usuario.fechaRegistro ? new Date(usuario.fechaRegistro).toLocaleDateString() : '-'}</td>
-                <td>
-                  <button className="btn-edit" onClick={() => editarUsuario(usuario)}>✏️ Editar</button>
-                  <button className="btn-delete" onClick={() => eliminarUsuario(usuario.id)}>🗑️ Eliminar</button>
-                </td>
+                <td>{usuario.fechaRegistro ? new Date(user.fechaRegistro).toLocaleDateString() : '-'}</td>
               </tr>
             ))}
           </tbody>
@@ -108,7 +88,12 @@ function AdminPanel() {
                 <td>{post.likes ?? 0}</td>
                 <td>{Array.isArray(post.comentarios) ? post.comentarios.length : '-'}</td>
                 <td>
-                  <button className="btn-delete" onClick={() => eliminarPublicacion(post.id)}>❌ Eliminar</button>
+                  <button
+                    className="btn-delete"
+                    onClick={() => eliminarPublicacion(post.id)}
+                  >
+                    ❌ Eliminar
+                  </button>
                 </td>
               </tr>
             ))}

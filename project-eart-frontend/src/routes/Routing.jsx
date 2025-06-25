@@ -11,6 +11,7 @@ import AdminDashboard from '../pages/AdminDashboard';
 import Noti from '../pages/Noti';
 import CentroAyuda from '../pages/CentroAyuda';
 import PanelAdmin from '../pages/PanelAdmin';
+import Panel from '../pages/Panel';
 function Routing() {
   return (
     <Router>
@@ -18,8 +19,8 @@ function Routing() {
         <Route path="/" element={<Home />} />
         <Route path="/QuienesSomos" element={<Quienessomos />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/Panel" element={<PanelDeControl/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/Panel" element={<Panel/>} />
         <Route path="/navbar" element={<Nav/>} />
         <Route path="/Publicaciones" element={<Publicaciones/>} />
         <Route path="/CardsComponent" element={<CardsComponent/>} />

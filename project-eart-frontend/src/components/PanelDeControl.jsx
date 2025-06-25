@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { getData } from '../services/llamadosUsuarios';
+import { getData } from '../../services/llamadosUsuarios';
 
 function PanelDeControl() {
   const [usuarios, setUsuarios] = useState([]);

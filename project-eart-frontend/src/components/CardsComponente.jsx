@@ -5,7 +5,7 @@ import {
   postDataPublcaciones,
   deletePublicacion,
   editPublicacion,
-} from "../services/llamados";
+} from "../../services/llamados";
 
 const CardsComponente = () => {
   const [posts, setPosts] = useState([]);

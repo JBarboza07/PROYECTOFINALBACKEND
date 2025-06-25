@@ -56,7 +56,7 @@ class PermisosVistas2(BasePermission):
                   
 
 class PublicacionesListCreateView(ListCreateAPIView):
-     # permission_classes = [PermisosVistas]
+      permission_classes = [PermisosVistas]
       queryset =Publicaciones.objects.all()
       serializer_class = PublicacionesSerializer
 
