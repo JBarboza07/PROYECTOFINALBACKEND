@@ -1,0 +1,44 @@
+.centro-ayuda-container {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(56, 142, 60, 0.15);
+  padding: 32px 24px;
+  max-width: 700px;
+  margin: 40px auto;
+}
+
+.titulo-principal {
+  color: #388e3c;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titulo-principal::after {
+  content: "♻️";
+  font-size: 1.5em;
+}
+
+.descripcion {
+  color: #4caf50;
+  margin-bottom: 24px;
+}
+
+.faq-section .MuiAccordion-root {
+  background: #f1f8e9;
+  border-radius: 10px !important;
+  margin-bottom: 12px;
+  border: 1px solid #a5d6a7;
+}
+
+.faq-section .MuiAccordionSummary-root {
+  color: #388e3c;
+  font-weight: 500;
+}
+
+.faq-section .MuiAccordionDetails-root {
+  color: #2e7d32;
+  background: #e8f5e9;
+  border-radius: 0 0 10px 10px;
+}

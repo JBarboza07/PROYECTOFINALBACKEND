@@ -1,13 +1,13 @@
 import React from 'react'
 import { Box, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import '../styles/CentroDeAyuda.css';
+import '../Styles/CentroAyuda.css';
 
 function CentroDeAyuda() {
   return (
     <Box className="centro-ayuda-container">
       <Typography variant="h4" className="titulo-principal">
-        Centro de Ayuda - Project Earth :tierra_áfrica:
+        Centro de Ayuda - Project Earth 
       </Typography>
       <Typography variant="body1" className="descripcion">
         Encuentra respuestas a preguntas frecuentes, cómo usar la plataforma, reportar problemas y más.
