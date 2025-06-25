@@ -38,14 +38,13 @@ export default function Navbar({ onLogout }) {
           <Box className="nav-search-icon">
             <SearchIcon />
           </Box>
-          <InputBase placeholder="Buscar" className="nav-search-input" />
         </Box>
 
         <Box className="nav-icons">
           <IconButton onClick={() => navigate('/Noti')}>
             <ExploreIcon className="nav-icon" />
           </IconButton>
-          <IconButton onClick={() => navigate('/CentroDeAyuda')}>
+          <IconButton onClick={() => navigate('/CentroAyuda')}>
             <FavoriteBorderIcon className="nav-icon" />
           </IconButton>
           <IconButton onClick={() => navigate('/Panel')}>

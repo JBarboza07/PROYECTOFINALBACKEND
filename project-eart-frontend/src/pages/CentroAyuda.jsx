@@ -7,4 +7,4 @@ function CentroDeAyuda() {
     </div>
   )
 }
-export default CentroDeAyuda
+export default CentroAyuda
