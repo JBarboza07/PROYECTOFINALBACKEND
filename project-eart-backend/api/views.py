@@ -115,7 +115,8 @@ class LoginUsuarioView(APIView):
             if usuario is not None:
                   token_acceso = AccessToken.for_user(usuario)
                   token_actualizacion = RefreshToken.for_user(usuario)
-                  return Response({"exito":"USUARIO AUTENTICADO CON EXITO","id":usuario.id,"token":str(token_acceso), "refresh":str(token_actualizacion)}, status=200)
+                  grupo_usuario = usuario.groups.first().name if usuario.groups.exists() else None
+                  return Response({"exito":"USUARIO AUTENTICADO CON EXITO","id":usuario.id,"token":str(token_acceso), "refresh":str(token_actualizacion), "grupo": grupo_usuario}, status=200)
             else:
                   return Response({"mensaje":"CONTRASEÑA INCORRECTOS"}, status=400)
             

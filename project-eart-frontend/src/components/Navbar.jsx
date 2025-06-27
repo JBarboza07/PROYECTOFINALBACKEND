@@ -34,12 +34,6 @@ export default function Navbar({ onLogout }) {
           Project Earth
         </Typography>
 
-        <Box className="nav-search-container">
-          <Box className="nav-search-icon">
-            <SearchIcon />
-          </Box>
-        </Box>
-
         <Box className="nav-icons">
           <IconButton onClick={() => navigate('/Noti')}>
             <ExploreIcon className="nav-icon" />

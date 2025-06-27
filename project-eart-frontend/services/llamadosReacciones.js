@@ -1,5 +1,5 @@
 async function PostReacciones(endpoint,obj) {
-  const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}`, {
+  const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}/`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -13,7 +13,13 @@ async function PostReacciones(endpoint,obj) {
 }
 
 async function getReacciones(endpoint) {
-    const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}`)
+    const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    });
     const respuesta = await peticion.json();
     console.log(respuesta);
     return respuesta;
@@ -60,4 +66,4 @@ async function getReacciones(endpoint) {
   }
 }
 
-export { PostReacciones, getReacciones , deletePublicaciones, editReacciones };
+export { PostReacciones, getReacciones , deleteReacciones, editReacciones };
