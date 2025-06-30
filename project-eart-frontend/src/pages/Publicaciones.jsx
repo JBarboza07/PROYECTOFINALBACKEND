@@ -2,7 +2,7 @@ import React from 'react';
 import Cards from '../components/CardsComponente';
 import { Box, Typography } from '@mui/material';
 import Navbar from '../components/Navbar';
-import Publicaciones2 from '../components/Publicaciones2';
+import Publicaciones1 from '../components/Publicaciones1';
 function Publicaciones() {
   return (
     <Box sx={{ backgroundColor: '#f5f5f5', minHeight: '100vh', py: 4 }}>
@@ -12,7 +12,7 @@ function Publicaciones() {
 
       {/* Simula múltiples publicaciones */}
        <Navbar/>
-      <Publicaciones2/>
+       
       </Box>
    
     
