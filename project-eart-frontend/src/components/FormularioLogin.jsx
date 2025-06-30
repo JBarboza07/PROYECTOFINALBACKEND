@@ -19,11 +19,15 @@ function FormularioLogin() {
 
     if (enviar.exito) {
       console.log("usuario logueado");
-
       // Guardar el ID del usuario en localStorage
       localStorage.setItem("usuarioID", enviar.id); // Ajusta "enviar.id" si el ID viene en otro campo
-      
+      localStorage.setItem("token", enviar.token); // Guardar el token si es necesario
+      if(enviar.grupo === "administrador") {
+      navigate("/Admin");
+      return
+      }
       navigate("/Publicaciones");
+
     } else {
       console.log("usuario no logueado");
       alert("Usuario o contraseña incorrectos");

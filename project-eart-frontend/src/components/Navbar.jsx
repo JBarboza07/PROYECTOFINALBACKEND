@@ -35,18 +35,11 @@ export default function Navbar() {
           Project Earth
         </Typography>
 
-        <Box className="nav-search-container">
-          <Box className="nav-search-icon">
-            <SearchIcon />
-          </Box>
-          <InputBase placeholder="Buscar" className="nav-search-input" />
-        </Box>
-
         <Box className="nav-icons">
-          <IconButton onClick={() => navigate('/Noticias')}>
+          <IconButton onClick={() => navigate('/Noti')}>
             <ExploreIcon className="nav-icon" />
           </IconButton>
-          <IconButton onClick={() => navigate('/ayuda')}>
+          <IconButton onClick={() => navigate('/CentroAyuda')}>
             <FavoriteBorderIcon className="nav-icon" />
           </IconButton>
           <IconButton onClick={() => navigate('/Panel')}>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../styles/CardsComponente.css"; // Asegúrate de tener este archivo CSS
 import {
   getPublicaciones,
   postDataPublcaciones,
@@ -14,10 +15,11 @@ const CardsComponente = () => {
 
   useEffect(() => {
     async function fetchPosts() {
-      const publicaciones = await getPublicaciones("api/Publicaciones/");
+      console.log("Fetching posts...");
+      
+      const publicaciones = await getPublicaciones("Publicaciones");
       setPosts(publicaciones);
       console.log(publicaciones);
-      
     }
     fetchPosts();
   }, []);
@@ -29,11 +31,11 @@ const CardsComponente = () => {
   const handleAddPost = async () => {
     if (newPost.trim() && image) {
       const obj = {
-        publicacionFoto: "urlimagen",
+        publicacionFoto: "urlimagen", // TODO: aquí debes subir realmente la imagen o usar FileReader
         publicacion: newPost,
       };
 
-      const res = await postDataPublcaciones("api/Publicaciones/", obj);
+      const res = await postDataPublcaciones("Publicaciones", obj);
       setPosts([...posts, res]);
       setNewPost("");
       setImage(null);
@@ -41,7 +43,7 @@ const CardsComponente = () => {
   };
 
   const handleDeletePost = async (id) => {
-    const success = await deletePublicacion("api/Publicaciones", id);
+    const success = await deletePublicacion("/api/Publicaciones", id+"/");
     if (success) {
       setPosts(posts.filter((post) => post.id !== id));
     }
@@ -59,9 +61,15 @@ const CardsComponente = () => {
       const objEditar = {
         publicacion: newPost,
       };
-      const updatedPost = await editPublicacion(`api/Publicaciones`, id, objEditar);
+      const updatedPost = await editPublicacion("Publicaciones", id, objEditar);
       if (updatedPost) {
-        setPosts(posts.map(post => post.id === parseInt(id) ? { ...post, publicacion: newPost } : post));
+        setPosts(
+          posts.map((post) =>
+            post.id === parseInt(id)
+              ? { ...post, publicacion: newPost }
+              : post
+          )
+        );
         setEditingPost(null);
         setNewPost("");
       }
@@ -77,20 +85,29 @@ const CardsComponente = () => {
           <li key={post.id} className="card-item">
             <p className="card-text">{post.publicacion}</p>
             {post.publicacionFoto && (
-              <img src={post.publicacionFoto} alt="Publicación" className="card-img" />
+              <img
+                src={post.publicacionFoto}
+                alt="Publicación"
+                className="card-img"
+              />
             )}
             <div className="card-buttons">
-              <button onClick={() => handleEditPost(post, post.id)} className="card-button btn-edit">
+              <button
+                onClick={() => handleEditPost(post, post.id)}
+                className="card-button btn-edit"
+              >
                 Editar
               </button>
-              <button onClick={() => handleDeletePost(post.id)} className="card-button btn-delete">
+              <button
+                onClick={() => handleDeletePost(post.id)}
+                className="card-button btn-delete"
+              >
                 Eliminar
               </button>
             </div>
           </li>
         ))}
       </ul>
-
       <input
         type="text"
         value={newPost}
@@ -118,3 +135,4 @@ const CardsComponente = () => {
 };
 
 export default CardsComponente;
+

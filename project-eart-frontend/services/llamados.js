@@ -1,8 +1,9 @@
 async function postDataPublcaciones(endpoint,obj) {
-  const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}`, {
+  const peticion = await fetch(`http://127.0.0.1:8000/api/${endpoint}/`, {
     method: 'POST',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
     },
     body: JSON.stringify(obj)
   });
@@ -12,17 +13,26 @@ async function postDataPublcaciones(endpoint,obj) {
 }
 
 async function getPublicaciones(endpoint) {
-    const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}`)
-    const respuesta = await peticion.json();
-    console.log(respuesta);
-    return respuesta;
+  const res = await fetch(`http://127.0.0.1:8000/api/${endpoint}/`,{
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+    }
+  });
+  const data = await res.json();
+  return data;
 }
 
 async function deletePublicacion(endpoint, id) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/${endpoint}/${id}`, {
+        const response = await fetch(`http://127.0.0.1:8000${endpoint}/${id}`, {
             method: "DELETE",
-        });
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
 
         if (response.ok) {
             console.log(`Publicación con ID ${id} eliminada correctamente.`);
@@ -40,10 +50,11 @@ async function deletePublicacion(endpoint, id) {
 
  async function editPublicacion(endpoint, id, updatedData) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/${endpoint}/${id}`, {
+    const response = await fetch(`http://127.0.0.1:8000/api/${endpoint}/${id}/`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify(updatedData),
     });

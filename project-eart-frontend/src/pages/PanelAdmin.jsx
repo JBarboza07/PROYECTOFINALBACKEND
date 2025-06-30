@@ -1,7 +1,5 @@
 import React from 'react';
 import  AdminPanel from '../components/AdminPanel'
-
-
 function PanelAdmin() {
   return (
     <div>
@@ -9,5 +7,4 @@ function PanelAdmin() {
     </div>
   )
 }
-
 export default PanelAdmin
