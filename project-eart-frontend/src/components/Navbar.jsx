@@ -1,3 +1,4 @@
+
 import React from 'react';
 import "../styles/Nav.css";
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +20,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
-export default function Navbar({ onLogout }) {
+export default function Navbar() {
   const navigate = useNavigate(); // React Router redirection hook
 
   return (

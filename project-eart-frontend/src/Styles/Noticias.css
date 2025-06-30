@@ -70,3 +70,25 @@
   padding: 10px;
   border-radius: 10px;
 }
+.btn-saber-mas {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-saber-mas:hover {
+  background-color: #388e3c;
+}
+
+.detalle-noticia {
+  margin-top: 10px;
+  color: #444;
+  font-style: italic;
+}
+

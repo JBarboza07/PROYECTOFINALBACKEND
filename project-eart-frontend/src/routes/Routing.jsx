@@ -10,6 +10,8 @@ import Cards from '../components/Cards';
 import AdminDashboard from '../pages/AdminDashboard';
 import Noti from '../pages/Noti';
 import Noticias from '../components/Noticias';
+import CentroDeAyuda from '../pages/CentroDeAyuda';
+import PanelAdmin from '../pages/PanelAdmin';
 
 function Routing() {
   return (
@@ -24,6 +26,9 @@ function Routing() {
         <Route path="/Publicaciones" element={<Publicaciones/>} />
         <Route path="/Cards" element={<Cards/>} />
         <Route path="/Noti" element={<Noticias/>} />
+       <Route path="/Ayuda" element={<CentroDeAyuda/>} />
+       <Route path="/Admin" element={<PanelAdmin/>} />
+        
         
       </Routes>
     </Router>
