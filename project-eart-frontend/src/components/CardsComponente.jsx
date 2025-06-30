@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/CardsComponente.css"; // Asegúrate de tener este archivo CSS
+import "../styles/CardsComponente.css";
 import {
   getPublicaciones,
   postDataPublcaciones,
@@ -7,31 +7,52 @@ import {
   editPublicacion,
 } from "../../services/llamados";
 
+const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dy2zlumk8/image/upload";
+const UPLOAD_PRESET = "imgUsuarios";
+
 const CardsComponente = () => {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
   const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [editingPost, setEditingPost] = useState(null);
 
   useEffect(() => {
     async function fetchPosts() {
-      console.log("Fetching posts...");
-      
       const publicaciones = await getPublicaciones("Publicaciones");
       setPosts(publicaciones);
-      console.log(publicaciones);
     }
     fetchPosts();
   }, []);
 
-  const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+
+      // Subir a Cloudinary automáticamente
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      try {
+        const res = await fetch(CLOUDINARY_URL, {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+        setImageUrl(data.secure_url); // Guardar la URL de la imagen
+      } catch (err) {
+        console.error("Error al subir imagen a Cloudinary:", err);
+      }
+    }
   };
 
   const handleAddPost = async () => {
-    if (newPost.trim() && image) {
+    if (newPost.trim() && imageUrl) {
       const obj = {
-        publicacionFoto: "urlimagen", // TODO: aquí debes subir realmente la imagen o usar FileReader
+        publicacionFoto: imageUrl,
         publicacion: newPost,
       };
 
@@ -39,11 +60,12 @@ const CardsComponente = () => {
       setPosts([...posts, res]);
       setNewPost("");
       setImage(null);
+      setImageUrl("");
     }
   };
 
   const handleDeletePost = async (id) => {
-    const success = await deletePublicacion("/api/Publicaciones", id+"/");
+    const success = await deletePublicacion("/api/Publicaciones", id + "/");
     if (success) {
       setPosts(posts.filter((post) => post.id !== id));
     }
@@ -52,6 +74,7 @@ const CardsComponente = () => {
   const handleEditPost = (post, id) => {
     setEditingPost(post);
     setNewPost(post.publicacion);
+    setImageUrl(post.publicacionFoto || "");
     localStorage.setItem("idPublicacion", id);
   };
 
@@ -60,18 +83,21 @@ const CardsComponente = () => {
     if (editingPost) {
       const objEditar = {
         publicacion: newPost,
+        publicacionFoto: imageUrl,
       };
       const updatedPost = await editPublicacion("Publicaciones", id, objEditar);
       if (updatedPost) {
         setPosts(
           posts.map((post) =>
             post.id === parseInt(id)
-              ? { ...post, publicacion: newPost }
+              ? { ...post, publicacion: newPost, publicacionFoto: imageUrl }
               : post
           )
         );
         setEditingPost(null);
         setNewPost("");
+        setImage(null);
+        setImageUrl("");
       }
     }
   };
@@ -108,6 +134,7 @@ const CardsComponente = () => {
           </li>
         ))}
       </ul>
+
       <input
         type="text"
         value={newPost}
@@ -135,4 +162,5 @@ const CardsComponente = () => {
 };
 
 export default CardsComponente;
+
 
