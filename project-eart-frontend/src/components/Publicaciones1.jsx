@@ -35,6 +35,7 @@ function Post({ post, onUpdate }) {
       body: JSON.stringify({"comentarios":commentText})
     })
     console.log(enviarComentario);
+    
     onUpdate(updated);
     setCommentText("");
   };
