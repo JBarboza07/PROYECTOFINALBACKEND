@@ -23,8 +23,8 @@ function FormularioLogin() {
       localStorage.setItem("usuarioID", enviar.id); // Ajusta "enviar.id" si el ID viene en otro campo
       localStorage.setItem("token", enviar.token); // Guardar el token si es necesario
       if(enviar.grupo === "administrador") {
-      navigate("/Admin");
-      return
+      navigate("/admi");
+
       }
       navigate("/Publicaciones");
 
